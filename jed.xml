@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<updates>
+    <update>
+        <name>Quix</name>
+        <description>Next generation drag and drop page builder for Joomla.</description>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>6.2.3</version>
+        <infourl title="Quix Page Builder">https://www.themexpert.com/quix-pagebuilder</infourl>
+        <changelogurl>https://github.com/themexpert/quix-free/releases/tag/6.2.3</changelogurl>
+        <downloads>
+            <downloadurl type="full" format="zip">https://github.com/themexpert/quix-free/releases/download/6.2.3/pkg_quix_free.zip</downloadurl>
+        </downloads>
+        <sha256>286637e204793a4b5e4dcf842003d611e8feec1f30aa7131ccccea1c9bfb2707</sha256>
+        <maintainer>ThemeXpert</maintainer>
+        <maintainerurl>https://www.themexpert.com</maintainerurl>
+        <targetplatform name="joomla" version="(3\.10|4\.|5\.|6\.)"/>
+        <php_minimum>7.4</php_minimum>
+        <tags>
+            <tag>stable</tag>
+        </tags>
+    </update>
+</updates>

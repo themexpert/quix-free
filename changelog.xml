@@ -1,0 +1,2550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelogs>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>6.2.4</version>
+        <security>
+            <item>Fixed unauthenticated page creation via a bare CSRF token.</item>
+            <item>Fixed missing permission checks on collection rename/publish by ID.</item>
+            <item>Fixed page/collection creation silently overwriting an existing record.</item>
+            <item>Replaced the quixlogin cookie-guessing fallback with a signed, time-limited token.</item>
+        </security>
+        <fix>
+            <item>Cursor jumping in builder text fields.</item>
+            <item>Canvas loading overlay hidden behind builder UI.</item>
+            <item>Page meta description overwritten by menu item.</item>
+            <item>Local image URLs not resolved to absolute for OG/meta tags.</item>
+            <item>Twig function name collision with other extensions.</item>
+            <item>Advanced tab fields (CSS ID/Class, etc.) occasionally empty after cache rebuild.</item>
+            <item>Schema cache could corrupt under concurrent rebuilds.</item>
+            <item>A misleading "WebAssetManager is locked" error could mask the real failure and skip logging it.</item>
+            <item>Debug / Error Logs screen showed no entries even when errors were actually being logged.</item>
+            <item>Clear Log button did not actually clear the log file.</item>
+            <item>Page checkout could fail with "Argument userId must be an integer" on some hosts.</item>
+            <item>License activation rejected valid keys as a mismatch on any site without a manual config override.</item>
+            <item>Bundled JMedia sub-extensions shipping mismatched version numbers.</item>
+            <item>"Activate Now" / "License missing" indicators rendered in neutral colors instead of red.</item>
+            <item>License request/response debug log entries logged at WARNING instead of INFO.</item>
+            <item>Component language files not installing due to a filename mismatch in the manifest — renamed en-GB.com_quix.ini to com_quix.ini (and same for .sys.ini) to match what ships and what Joomla actually loads.</item>
+        </fix>
+        <addition>
+            <item>Debug / Error Logs screen for render and builder-load failures.</item>
+            <item>Detects a builder stuck loading, not just one that throws an error.</item>
+            <item>Automatic license re-check with actionable admin notices.</item>
+            <item>Admin notice when JMedia is disabled, linking to Extensions to re-enable it.</item>
+            <item>License activation/deactivation/check calls now logged for debugging.</item>
+            <item>Debug / Error Logs screen shows the log file's path on disk.</item>
+        </addition>
+        <change>
+            <item>Faster builder boot — element icons load in one request instead of dozens.</item>
+            <item>Faster page loads — static assets served directly instead of via PHP proxy.</item>
+            <item>Simplified admin toolbar cache controls into one-click clean.</item>
+            <item>Cache icon now shows a spinner while clearing, instead of no feedback at all.</item>
+            <item>Revised the "new v2 license system" notice with a clearer message and a Visit License Server button.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>6.2.3</version>
+        <fix>
+            <item>Fixed cross-domain copy/paste silently failing in Chromium-based browsers: the builder cached a reference to the clipboard frame before it finished loading, so copied elements never reached the shared clipboard and paste could hang.</item>
+        </fix>
+        <change>
+            <item>Cross-domain copy/paste is now opt-in (Options → Cross-domain Copy/Paste, off by default). The builder no longer loads the getquix.net clipboard frame unless you enable it — this removes the Cloudflare "verify you are human" checkbox some users saw inside the builder.</item>
+            <item>Copy/paste within the same site now works without the external clipboard frame, using browser storage.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>6.2.2</version>
+        <security>
+            <item>Fixed an unauthenticated SQL injection in the Joomla Article element.</item>
+            <item>Fixed a code-execution path via the Raw HTML element (PHP tags in element content are now neutralised).</item>
+            <item>Fixed a path traversal / arbitrary file read in the Form element submission handler.</item>
+            <item>Fixed stored cross-site scripting (XSS) through the icon field, including inline SVG.</item>
+            <item>Fixed the Advanced → CSS ID / Class fields not being sanitised on render (the sanitiser read the wrong data path), which allowed CSS selector and class-attribute breakout on a saved page.</item>
+            <item>Added an explicit permission check to the admin media manager endpoint.</item>
+            <item>Stopped reflecting internal error details in frontend AJAX responses.</item>
+            <item>Updated the bundled JMedia media manager: blocks executable/polyglot uploads (RCE) and remote-URL SSRF, sanitises uploaded SVG, and serves files with hardened headers to close a media-picker XSS.</item>
+        </security>
+        <fix>
+            <item>Fixed a fatal error ("Class 'Joomla\Database\ParameterType' not found") in the Joomla Article element on Joomla 3.</item>
+            <item>Fixed a fatal error on Joomla 6 ("Class 'Joomla\CMS\Filesystem\Folder' not found") when rendering a Quix page — the filesystem classes it used were removed in Joomla 6.</item>
+            <item>Fixed a fatal error on every page render caused by dead form-encryption setup in the form footer.</item>
+        </fix>
+        <change>
+            <item>Updating Quix now automatically clears every Quix cache — page/view cache, compiled template (Twig) cache, builder schema cache, and dynamic icon/image caches — so security fixes take effect immediately without a manual cache clear.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>6.2.1</version>
+        <security>
+            <item>Security release — updating is strongly recommended for all sites.</item>
+            <item>Fixed an unauthenticated SQL injection in the Joomla Article element.</item>
+            <item>Fixed a code-execution path via the Raw HTML element (PHP tags in element content are now neutralised).</item>
+            <item>Fixed a path traversal / arbitrary file read in the Form element submission handler.</item>
+            <item>Fixed stored cross-site scripting (XSS) through the icon field, including inline SVG.</item>
+            <item>Added an explicit permission check to the admin media manager endpoint.</item>
+            <item>Stopped reflecting internal error details in frontend AJAX responses.</item>
+            <item>Updated the bundled JMedia media manager: blocks executable/polyglot uploads (RCE) and remote-URL SSRF, sanitises uploaded SVG, and serves files with hardened headers to close a media-picker XSS.</item>
+        </security>
+        <fix>
+            <item>Fixed images being cropped by an over-eager aspect-ratio/object-fit rule inherited from an updated UIkit base.</item>
+            <item>Restored the builder loading screen, which had become invisible so the editor appeared to load on a blank page.</item>
+            <item>Pricing Table: reverted the forced card styling, border and default description that were applied to existing tables, while keeping the new GSAP entrance animations.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>6.2.0</version>
+        <security>
+            <item>Completed a full security audit of the extension. Updating is strongly recommended.</item>
+            <item>Hardened all frontend API endpoints with strict permission and access checks.</item>
+            <item>Fixed input handling and output escaping across elements, modules, and plugins.</item>
+            <item>Tightened file, URL, and database query handling throughout the component.</item>
+        </security>
+        <fix>
+            <item>Improved frontend performance: self-hosted GSAP loaded only when needed, and compressed asset delivery.</item>
+            <item>Reduced memory usage during page rendering.</item>
+            <item>Fixed compatibility issues with Joomla 5.3+ and the Atom template on Joomla 5/6.</item>
+            <item>Fixed builder failing to load all elements when a single element has a broken configuration (surfaced as a "WebAssetManager is locked" error), and made element loading faster by no longer rebuilding the full schema cache on every request.</item>
+        </fix>
+        <addition>
+            <item>Redesigned builder toolbar and sidebars with a cleaner, consistent look including dark mode.</item>
+            <item>Added device frames around the canvas with zoom support for responsive previews.</item>
+            <item>Added a new New Page modal and persistent custom breakpoints.</item>
+            <item>Redesigned the admin panel with a modern card-based layout.</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>6.1.0</version>
+        <addition>
+            <item>Added a new Block Number element with full configuration options, styles, and scripts.</item>
+            <item>Added a new Image Content element.</item>
+            <item>Added a new Clients element with configuration.</item>
+            <item>Added a new Instagram Feed element with configuration</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>6.0.4</version>
+        <fix>
+            <item>Fixed the text-shadow not working on any element issue.</item>
+        </fix>
+        <addition>
+            <item>Added a new global setting to disable CSS preconnect.</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>6.0.3</version>
+        <fix>
+            <item>fix the admin quix menu not opening issue.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>6.0.2</version>
+        <fix>
+            <item>resolve JPATH_COMPONENT_ADMINISTRATOR conflict for Joomla 6.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>6.0.1</version>
+        <fix>
+            <item>Fixed the JMedia not loading in Joomla 6 issue.</item>
+            <item>Fixed the icon-list styling issue.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>6.0.0</version>
+        <addition>
+            <item>Added Joomla 6 support.</item>
+            <item>Integrates GSAP as a new animation engine across 5 elements: `Heading, Text, Icon List, Image, Button`.</item>
+            <item>Adds a shared gsap-animation.js script registered in Joomla's asset system.</item>
+            <item>Each element gets new config options (duration, delay, easing, scroll trigger)</item>
+            <item>Adds a magnetic cursor effect for the Button element</item>
+            <item>Adds an image reveal animation for Image</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.5.0</version>
+        <addition>
+            <item>Added brand new `Timeline` element.</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.4.2</version>
+        <fix>
+            <item>Fixed invalid data parsing of `qx_elements` and `QUIX_PAGES`.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.4.1</version>
+        <fix>
+            <item>Fixed JMedia not loading because of the extra url parameters issue.</item>
+            <item>Fixed asset loading not working on Window servers issue.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.4.0</version>
+        <fix>
+            <item>Fixed auto insert 0 in the dimension component issue.</item>
+            <item>Fixed seo panel not showing issue.</item>
+            <item>Fixed box-shadow not showing in the builder issue.</item>
+        </fix>
+        <addition>
+            <item>Added a new modal popup element.</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.3.0</version>
+        <fix>
+            <item>Added Joomla 5 Web Assets Management support.</item>
+            <item>Added auto version update support for joomla assets files.</item>
+            <item>Refactored the iframe view to improve asset loading.</item>
+            <item>Fixed the issue of Template delete buton not working.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.2.9</version>
+        <fix>
+            <item>Fixed the HTML Form field causing the required validation issue.</item>
+            <item>Fixed Jmedia model style borken issue in dark mode.</item>
+            <item>Fixed Image picker style broken issue in dark mode.</item>
+            <item>Fixed My template style broken issue in dark mode.</item>
+            <item>Fixed Page and Leary pannel overlap issue.</item>
+            <item>Fixed Add to Menu model style borken issue in dark mode.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.2.8</version>
+        <fix>
+            <item>Fixed the section, row, column overlay overflowing issue.</item>
+            <item>Fixed the row overlay not taking the full width and height issue.</item>
+            <item>Fixed duplicate quix version declaration.</item>
+            <item>Fixed device change dose not trigger re-render issue.</item>
+            <item>Fixed the '0 + 0' captcha problem.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.2.7</version>
+        <change>
+            <item>Added an option to the config to enable disable the SEO feature of quix.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.2.6</version>
+        <fix>
+            <item>Fixed the Video Pro overlay image not taking full width issue.</item>
+            <item>Fixed the ACL permission mismatch issue.</item>
+        </fix>
+        <change>
+            <item>Adding username and key to the db after verifying on installation.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.2.5</version>
+        <fix>
+            <item>Fixed the Automatic installer freezing issue.</item>
+            <item>Fixed the Updated through Joomla Updater not working issue.</item>
+            <item>Fixed the incorrect text in the admin panel.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.2.4</version>
+        <addition>
+            <item>Added GDPR compliance banner to the admin panel.</item>
+            <item>Enabled local downloading and loading of fonts.</item>
+            <item>Implemented user consent prompts for loading external resources (e.g., Google Maps, YouTube).</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.2.3</version>
+        <fix>
+            <item>Fixed the heading element text is not updating when typing.</item>
+            <item>Fixed Dimensions negative value not accepting issue.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.2.2</version>
+        <fix>
+            <item>Fixed the issue where inserting, moving, and deleting elements did not reflect in the preview.</item>
+        </fix>
+        <addition>
+            <item>Added a new field in row to position the container horizontally.</item>
+            <item>Mouse wheel can increase and decrees the input value.</item>
+        </addition>
+        <change>
+            <item>Reduced the mismatch in spacing between the builder and preview.</item>
+            <item>Removed the extra space sounding the canvas.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.2.1</version>
+        <fix>
+            <item>Resolved site crash issue during Quix uninstallation.</item>
+            <item>Corrected styling issues for Form element input fields (checkbox, radio, etc.).</item>
+            <item>Fixed the multiple selected value missing in the backend</item>
+        </fix>
+        <change>
+            <item>Set default page order for recently modeled pages.</item>
+            <item>Added a new field in Quix's settings panel to choose a different page to mount on.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.2.0</version>
+        <fix>
+            <item>Updated tracker placement to prevent rendering issues</item>
+            <item>Removed redundant state subscriptions</item>
+            <item>Added development environment checks to prevent unnecessary reloads</item>
+        </fix>
+        <change>
+            <item>Optimized Redux state management using reselect</item>
+            <item>Refactored node getting function for better performance</item>
+            <item>Improved Controllers component stability</item>
+            <item>Removed unnecessary code and comments</item>
+            <item>Added cache skip functionality for element schema</item>
+            <item>Implemented on-demand node retrieval</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.1.6</version>
+        <fix>
+            <item>Fixed The Joomla-3 Language not loading issue.</item>
+            <item>Fixed a small ui inconsistency.</item>
+            <item>Fixed the inconsistent JSON formate from backend causing miss-formate issue.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.1.5</version>
+        <fix>
+            <item>Fixed typography increment button not working issue.</item>
+            <item>Fixed the group-element image picker was not working issue.</item>
+            <item>Fixed some a small style inconsistency in the admin panel.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.1.4</version>
+        <fix>
+            <item>Fixed the input value reset issue.</item>
+            <item>Fixed the TinyMCE "form" word altering issue.</item>
+            <item>Fixed the issue where a section could not be deleted from the context menu if the layer was collapsed.</item>
+        </fix>
+        <change>
+            <item>Added a new loading screen for the Admin panel.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.1.3</version>
+        <fix>
+            <item>fix: Fixed the background overlay opacity value not applying issue.</item>
+        </fix>
+        <change>
+            <item>Improved the initial loading time by shifting logic to the admin panel;</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.1.2</version>
+        <fix>
+            <item>fix: Fixed a small bug.</item>
+        </fix>
+        <addition>
+            <item>Added the Latest version of JMedia v1.5.2;</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.1.1</version>
+        <fix>
+            <item>fix: Fixed an internal Language related bug.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.1.0</version>
+        <fix>
+            <item>fix: Fixed the conflicting caching issue with the Newer version of Quix.</item>
+            <item>fix: Fixed the unit missing issue in the custom width.</item>
+            <item>fix: Resolved the missing link issue in the blurb element when installing v5.</item>
+            <item>fix: Corrected the styling issue of the "Get Started" button on the installation page.</item>
+            <item>fix: Fixed accordion rendering issue when duplicating or deleting an element.</item>
+            <item>fix: Fixed the input filed value not changing when the element changes issue.</item>
+            <item>fix: Fixed the D&amp;D issue with the row and column.</item>
+            <item>fix: Fixed the style broken issue in free lock popover.</item>
+            <item>fix: Fixed the free lock in element popover not showing issue.</item>
+            <item>fix: Fixed issue where custom styles for elements were not being applied.</item>
+            <item>fix: Fixed issue where the "My Elements" list was not updating correctly after adding or removing elements.</item>
+            <item>fix: Fixed issue where removing width and height settings did not revert to 100%, instead staying at 0.</item>
+            <item>fix: Fixed layer item drag and drop issue on every second column.</item>
+            <item>fix: Fixed the group-repeater title overflow issue.</item>
+            <item>fix: Moved the reload seo-panel next to the search field field.</item>
+            <item>fix: Fixed Section Add misplace issue from the context menu.</item>
+            <item>fix: Fixed layer item drag and drop issue</item>
+            <item>fix: Fixed nested element not selecting issue.</item>
+            <item>fix: Group Repeater value sync issue.</item>
+            <item>fix: Fixed the Upgrade to Pro and License Missing message and url issue.</item>
+            <item>fix: Fixed the Nested Element Selection Issue</item>
+            <item>fix: Fixed the Nested Element Delete Issue From Context Menu.</item>
+            <item>fix: Fixed the Tree Item indentation issue.</item>
+        </fix>
+        <addition>
+            <item>Added Multilingual support for the Quix editor.</item>
+            <item>Added Collapse Layer panel feature.</item>
+            <item>Quix-5 stable release</item>
+            <item>Introduced dark mode.</item>
+            <item>Added new dimension control for better accessibility.</item>
+        </addition>
+        <change>
+            <item>Made some small UI improvements.</item>
+            <item>Optimized and Settings opening process</item>
+            <item>Improved the canvas element selection functionality.</item>
+            <item>New UI</item>
+            <item>Performance Improved</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.5.8</version>
+        <fix>
+            <item>Fix - Form elements cache issue fixed</item>
+            <item>Fix - Module extra character issue fixed</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.5.7</version>
+        <fix>
+            <item>fix: 🐛 tinymce editor loading improved</item>
+            <item>fix: 🐛 Google Map Broken Markup Fixed</item>
+            <item>Fixed the Element Copy-Paste Functionality Issue.</item>
+            <item>fix: Fixed icon downloads bug</item>
+        </fix>
+        <change>
+            <item>refactor: 💡 refactor the loadElement code to improve the performance</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.5.6</version>
+        <fix>
+            <item>Icons now showing in preview mode</item>
+            <item>Form element's style broken issue fixed</item>
+            <item>Mod Quix php warning fixed</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.5.5</version>
+        <fix>
+            <item>fix 🐛 Form element style issue fixed.</item>
+            <item>fix 🐛 Accordion element image size bug fixed.</item>
+            <item>fix 🐛 Fixed disable for all screens issue.</item>
+            <item>fix 🐛 Fixed email sending error related to danger encoding.</item>
+        </fix>
+        <change>
+            <item>Improved the navigator feature (Edit title, Smooth drag &amp; drop, Duplicate, [Edit, Delete, Add, Reset] Elements from the right side menu).</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.5.4</version>
+        <fix>
+            <item>fix 🐛 Slider Z-Index input validation fixed.</item>
+            <item>fix 🐛 Quix collection table update issue #83</item>
+            <item>Google map element height issue fixed</item>
+            <item>Element: Joomla Menu: Off-canvas menu style fixed</item>
+        </fix>
+        <addition>
+            <item>🎸 Added the new Quix Navigator</item>
+        </addition>
+        <change>
+            <item>Countdown Elements's label visibility options on the mobile screen.</item>
+            <item>Removed Quix fonts priority to set the default font from template.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.5.3</version>
+        <fix>
+            <item>Custom element bug fixed</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.5.2</version>
+        <fix>
+            <item>Module loading fix</item>
+            <item>Form element bug fixed</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.5.1</version>
+        <fix>
+            <item>Say goodbye to erratic cursor jumps in textareas</item>
+            <item>Template item custom styles and icon layout are now bug-free, ensuring consistent design.</item>
+            <item>Paste the element you want into column elements seamlessly</item>
+            <item>Adding scripts to the head only happens once now, preventing duplicates.</item>
+            <item>Empty strings in links are handled correctly, avoiding broken connections.</item>
+        </fix>
+        <addition>
+            <item>Custom Code Unleashed</item>
+            <item>Updated all legacy class dependencies for enhanced compatibility and performance.</item>
+        </addition>
+        <change>
+            <item>Guided Tour Efficiency</item>
+            <item>Smoother Builder Interactions on columns resizing</item>
+            <item>Drag-and-Drop Delight on elements</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.5.0</version>
+        <addition>
+            <item>🎸Joomla 5</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.4.4</version>
+        <fix>
+            <item>fix: 🐛 License validation fixed.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.4.3</version>
+        <fix>
+            <item>fix: 🐛 The style for the missing icon path has been fixed.</item>
+        </fix>
+        <change>
+            <item>style: 💄 The blurb element's media display block and margin have been removed.</item>
+            <item>style: 💄 The element selector position has been changed to relative.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.4.2</version>
+        <fix>
+            <item>Resolved an issue with the version switcher</item>
+            <item>Accordion element content typography bug</item>
+            <item>Builder API bug fixed due to double slash in request</item>
+            <item>Smart Search - Finder plugin indexing bug fixed</item>
+            <item>Section save bug fixed for Joomla 4</item>
+        </fix>
+        <addition>
+            <item>🎸Introduced the clear page content feature</item>
+            <item>🎸Assets URL optimisation control</item>
+        </addition>
+        <change>
+            <item>Refactor Quix configuration options</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.4.1</version>
+        <fix>
+            <item>Page hits resetting on save</item>
+            <item>File manager url fixed for double slash</item>
+            <item>Italic style font-family bug fix</item>
+        </fix>
+        <addition>
+            <item>🎸 new option: Image Optimisation control</item>
+        </addition>
+        <change>
+            <item>Quix Page cache and cleaning cache</item>
+            <item>[search result] removed styles from search result</item>
+            <item>[search result] only published quix item will be indexed</item>
+            <item>[Accordion element] class not applied issue fixed</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.4.0</version>
+        <fix>
+            <item>edit-quix URL double slash caused the wrong route</item>
+        </fix>
+        <addition>
+            <item>🎸new codes manager for header and footer</item>
+        </addition>
+        <change>
+            <item>Joomla Article Element's API support to avoid cache conflict</item>
+            <item>Animated Headline Element's responsive alignment fix</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.3.9</version>
+        <fix>
+            <item>Color picker value does not shows on switching element</item>
+            <item>Typography font change does not show on switching element</item>
+        </fix>
+        <change>
+            <item>JCE Editor's code source edit mode support</item>
+            <item>Page CSS and JS loading on builder</item>
+            <item>New color picker for opacity changes</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.3.8</version>
+        <change>
+            <item>Joomla 4 routing update for API</item>
+            <item>JMedia for PHP 8.2 support</item>
+            <item>Atom templates html conflict resolved for J4</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.3.7</version>
+        <change>
+            <item>[Lottie Animation] You can use your local JSON file for animation</item>
+            <item>[Form Element] Plain email body format</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.3.6</version>
+        <fix>
+            <item>Joomla 4 - Lottie Animation script loading</item>
+            <item>Joomla 4 - Video Elements script loading</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.3.5</version>
+        <fix>
+            <item>Background image path fixed</item>
+            <item>Dynamic API data missing issue fixed</item>
+            <item>Assets loading improved</item>
+            <item>no more export with image and fixed import and export</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.3.4</version>
+        <fix>
+            <item>Uikit library update</item>
+            <item>tooltip style override from uikit to avoid template conflict</item>
+            <item>row-settings bar position fixed</item>
+        </fix>
+        <addition>
+            <item>Countdown element's Evergreen counter feature</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.3.3</version>
+        <fix>
+            <item>Video elements auto play on scroll issue fixed</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.3.2</version>
+        <fix>
+            <item>Customized elements css was not loading</item>
+        </fix>
+        <addition>
+            <item>Keyboard Shortcuts for Preview and Save[ ctrl+p-&gt;Preview,  ctrl+s-&gt;Save Page, ctrl+shift+p-&gt;Save &amp; Preview , ctrl+r-&gt;Reload Soft, ctrl+shift+r-&gt;Reload Hard ]</item>
+        </addition>
+        <change>
+            <item>JMedia for PHP8</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.3.1</version>
+        <fix>
+            <item>Testimonial rating issue fixed</item>
+            <item>media carousel</item>
+            <item>Testimonial carousel quotation issue</item>
+            <item>Duplicate page issue fixed</item>
+        </fix>
+        <change>
+            <item>Section style updated</item>
+            <item>Setting reset option</item>
+            <item>More entrance animation for elements</item>
+            <item>[Articles Element] Responsive layout</item>
+            <item>Image accessibility improved</item>
+            <item>Form - Input field accessibility issue</item>
+            <item>Image opacity slider issue fixed.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.3.0</version>
+        <fix>
+            <item>Article by Quix's intro-text issue fixed</item>
+            <item>Export page JSON validation issue fixed</item>
+            <item>Collection table wrong type issue fixed</item>
+            <item>Button elements icon hover issue fixed</item>
+            <item>Joomla Article elements style issue fixed</item>
+            <item>Slider pro elements button style issue fixed</item>
+            <item>Accordion element active item icon alignment issue fixed</item>
+            <item>Menu items duplicate key issue fixed</item>
+            <item>Joomla Articles Introtext including styles code bug fixed</item>
+        </fix>
+        <addition>
+            <item>Cross-domain copy paste</item>
+        </addition>
+        <change>
+            <item>Article with Quix</item>
+            <item>Dashboard style</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.2.1</version>
+        <fix>
+            <item>Media carousel element overlay issue fixed.</item>
+            <item>JSON import issue fixed.</item>
+            <item>Section overwrite issue fixed for library.</item>
+            <item>ACL 403 issue fixed.</item>
+        </fix>
+        <addition>
+            <item>Quick access buttons added for sections, rows and elements.</item>
+        </addition>
+        <change>
+            <item>Section control hidden issue fixed for the last section.</item>
+            <item>Settings fields style improved</item>
+            <item>JMedia for Joomla 4</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.2.0</version>
+        <fix>
+            <item>Fetal error due to style migration for J4</item>
+            <item>AMP link bug fixed for page</item>
+            <item>Quix as a editor bug fixed</item>
+        </fix>
+        <addition>
+            <item>New Router for Joomla 4 and Legacy for Joomla3</item>
+        </addition>
+        <change>
+            <item>Display condition modal style</item>
+            <item>Quix as an editor for Joomla 3 and Joomla 4</item>
+            <item>Joomla menu elements style</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.1.11</version>
+        <fix>
+            <item>[Google Map] height issue fixed</item>
+            <item>[Joomla menu] Dropdown submenu items style fixed</item>
+            <item>[Joomla menu] Submenu dropdown caret style fixed</item>
+            <item>[Blurb Element] image width issue fixed</item>
+            <item>[Form Element] Fix from element submit button full width issue</item>
+            <item>Image optimization fetal error for unsupported image</item>
+            <item>Fixed icon resize issue</item>
+            <item>Joomla SEF routing fix to save page on subdomain or sub-folder</item>
+        </fix>
+        <addition>
+            <item>[Accordion Element] Added Joomla content prepare event support</item>
+        </addition>
+        <change>
+            <item>[Header Builder] Display condition style</item>
+            <item>[Form Element] Invisible re-captcha</item>
+            <item>[Form Element] Multi-value selector</item>
+            <item>[Form Element] Default value and config update</item>
+            <item>[Video Pro] Auto-play and mute</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.1.10</version>
+        <fix>
+            <item>Menu Element fixed for menu type alias</item>
+            <item>Routing bug fixed for home page alias</item>
+            <item>API request URL fixed for cache css/js</item>
+            <item>Row min-height style and width fixed</item>
+            <item>0 value emptyChecker for border fixed</item>
+            <item>duplicate function conflict with classic</item>
+        </fix>
+        <change>
+            <item>Accordion element close first item delay issue fixed</item>
+            <item>unused code removed from twig file</item>
+            <item>Atom template css file loading logic update</item>
+            <item>Builder - new element button visibility issue fixed</item>
+            <item>Image link set to Absolute to view local image</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.1.9</version>
+        <fix>
+            <item>Classic page renderer fixed</item>
+        </fix>
+        <change>
+            <item>Atom template style improvement</item>
+            <item>Permission error page for J4</item>
+            <item>Builder Select form field search option for all select fields</item>
+            <item>Slider-pro elements image lazy load improved</item>
+            <item>Dynamic name and path for image cache</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.1.8</version>
+        <fix>
+            <item>Form element submit action warning</item>
+            <item>Page settings bug fixed for custom JS code</item>
+            <item>(PHP) Router warning Something is wrong issue fixed</item>
+            <item>Parallax Background image position conflict issue</item>
+        </fix>
+        <addition>
+            <item>Element path registry system event (Create your own element)</item>
+        </addition>
+        <change>
+            <item>JSON Import message and workflow</item>
+            <item>Divider and Smart-Tab  style improved</item>
+            <item>Same name image optimization and cache</item>
+            <item>Border type none style</item>
+            <item>Lottie animation style</item>
+            <item>Column background image size and style</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.1.7</version>
+        <fix>
+            <item>Router php notice for undefined id fixed</item>
+            <item>Builder fetal error fixed for slider element's unit value</item>
+            <item>My elements re-use bug fixed. data-processing bug</item>
+            <item>Image optimizer fetal error fixed for type null</item>
+        </fix>
+        <change>
+            <item>Testimonial Carousel Improvement (Rating content and Style)</item>
+            <item>Elements min padding 1 px extra spacing fixed</item>
+            <item>Row background-overlay fixed on builder view</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.1.6</version>
+        <fix>
+            <item>Element icon missing</item>
+            <item>Accordion element icon style and alignment</item>
+            <item>Background image attachment style</item>
+            <item>J4 routing fixed when home page is set to Quix</item>
+            <item>My Templates list not showing</item>
+            <item>DataBase checked out issue</item>
+        </fix>
+        <change>
+            <item>Grid style improved for row</item>
+            <item>Improvements of Atom template to support J4</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.1.5</version>
+        <fix>
+            <item>🐛 My elements bug fix</item>
+        </fix>
+        <addition>
+            <item>🎸 Custom Element register hook for template.</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.1.4</version>
+        <fix>
+            <item>🐛 Links attributes bug fix for 4 elements</item>
+            <item>🐛 Slider Pro, Social Icon, Flip Box, Dual Button, Call 2 action and Pricing Table</item>
+            <item>🐛 PHP Warning fixed for Media Version</item>
+        </fix>
+        <change>
+            <item>🐛 Modal Tab style improved</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.1.3</version>
+        <fix>
+            <item>🐛 Gantry Latest version conflict fixed</item>
+            <item>🐛 Quix Template Selector Modal fixed on Joomla Editor</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.1.2</version>
+        <fix>
+            <item>🐛 Meta image bug fixed</item>
+            <item>🐛 Classic page version switching bug fixed</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.1.1</version>
+        <fix>
+            <item>🐛 Row style duplicate border</item>
+            <item>🐛 SEO score result bug fix</item>
+            <item>🐛 Accordion element spacing and icon color fix</item>
+            <item>🐛 Helix framework style conflict fixed</item>
+            <item>🐛 Button element target issue fixed</item>
+            <item>🐛 SEO drawer style, builder icon path, assets version</item>
+            <item>🐛 Joomla4 Modules Templates selection form bug fixed</item>
+            <item>🐛 Article edit with quix bug fixed</item>
+            <item>🐛 Custom element for joomla3 dependency fixed for j4</item>
+            <item>🐛 Form Element email sending fix for visual-builder</item>
+            <item>🐛 Classic email sending ajax api migration</item>
+            <item>🐛 Email does not sent for sendmail bug fixed</item>
+            <item>🐛 Legacy file upload method's dependency fixed</item>
+            <item>💡 JSON request migration for legacy support.</item>
+        </fix>
+        <change>
+            <item>💡 JSON request migration for legacy support.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.1.0</version>
+        <fix>
+            <item>🐛 Section alignment fixed</item>
+            <item>🐛 Section background image optimization turned off due to UI issue</item>
+            <item>🐛 Image loading blur effect fixed</item>
+            <item>🐛 Builder Modal width adjustment fixed for elements list</item>
+            <item>🐛 ACL checker fixed to implement Joomla ACL</item>
+            <item>🐛 Admin style improved</item>
+            <item>🐛 Atom template style and tooltip style fix with j4</item>
+            <item>🐛 Blurb element style: icon border, padding, border radius, width</item>
+            <item>🐛 Border 0 value, empty value, hover style, and default</item>
+            <item>🐛 All elements border checker for 0 value and empty value fixed</item>
+            <item>🐛 Collection ordering warning fixed for J4</item>
+            <item>🐛 Collection publishes unpublish for J4</item>
+            <item>🐛 Context menu style and free-pro checker updated</item>
+            <item>🐛 Element icon URL fix for J4</item>
+            <item>🐛 Form element field height control and button icon alignment</item>
+            <item>🐛 Form input style and alert close option fixed</item>
+            <item>🐛 Header and Footer loading checker fixed</item>
+            <item>🐛 Header/Footer display condition setting modal bug for J4</item>
+            <item>🐛 Page and Collection ordering issue fixed for J4</item>
+            <item>🐛 Paste style live to reload</item>
+            <item>🐛 Quix icon and template name fix for J3 and J4</item>
+            <item>🐛 Redirect URL fixed for j4 to login and edit</item>
+            <item>🐛 Remote SVG image lazy load and color fixed</item>
+            <item>🐛 Template's list modal error fixed on the builder</item>
+            <item>🐛 Unsplash loading</item>
+            <item>🐛 CSS Background parallax fixed</item>
+        </fix>
+        <addition>
+            <item>🎸 Joomla 4 support</item>
+        </addition>
+        <change>
+            <item>🎸 Joomla 3 compatibility assured</item>
+            <item>🎸 Filemanager reload button on modal</item>
+            <item>🎸 J4 field modal for menu and routing support</item>
+            <item>🎸 J4 admin quick menu link to quix</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.0.4</version>
+        <fix>
+            <item>fix: 🐛 Form Element's math captcha</item>
+            <item>fix: 🐛 Blurb Icon's background color on preview</item>
+            <item>fix: 🐛 Form element required field validation</item>
+            <item>fix: 🐛 Background gradient color radial options does not work</item>
+            <item>fix: 🐛 Repeat welcome message</item>
+            <item>fix: 🐛 Background image parallax does not show</item>
+            <item>fix: 🐛 BoxShadow style and mobile css value merge conflict</item>
+            <item>fix: 🐛 forms and tabs element style fixed</item>
+            <item>fix: 🐛 data migration of form and divider update</item>
+            <item>fix: 🐛 tab element php warning fixed</item>
+            <item>fix: 🐛 admin menu, admin module, language and broken links</item>
+            <item>fix: 🐛 Gallery data migration</item>
+            <item>fix: 🐛 Google fonts delay loading</item>
+            <item>fix: 🐛 Form element alert style</item>
+            <item>fix: 🐛 Flip-box element bg image</item>
+            <item>fix: 🐛 Section bg overlay blur and lazy</item>
+            <item>fix: 🐛 Flipbox animation fix</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.0.3</version>
+        <fix>
+            <item>fix: 🐛 Builder sidebar spacing fix</item>
+            <item>fix: 🐛 JS style for icon fixe</item>
+            <item>fix: 🐛 Legacy cache call fixed and builder version params fix</item>
+            <item>fix: 🐛 Old section importing bug fixed</item>
+            <item>fix: 🐛 Button Element style</item>
+            <item>fix: 🐛 Fixed adding empty value css</item>
+            <item>fix: 🐛 Icon size migration</item>
+            <item>fix: 🐛 Section background image and its lazyloading fixed</item>
+            <item>fix: 🐛 Image exception handled with dependency fix</item>
+            <item>fix: 🐛 Text editor table toolbar added and fullscreen removed</item>
+            <item>fix: 🐛 History name undefined fixed for inline editing</item>
+            <item>fix: 🐛 Content resetting bug fixed for live-editing text editor</item>
+            <item>fix: 🐛 Icon style php warning fixed for legacy value</item>
+            <item>fix: 🐛 Quix API ssl URL fixed</item>
+            <item>fix: 🐛 Dual-button element migration fixed</item>
+            <item>fix: 🐛 Button element icon-size css</item>
+            <item>fix: 🐛 Classic template editing bug</item>
+            <item>fix: 🐛 Fix wrong versioning</item>
+            <item>fix: 🐛 Captcha checker php warning fixed</item>
+            <item>fix: 🐛 SVG rendering conflict with PHP Opening and Closing</item>
+            <item>fix: 🐛 Builder twig cache for cleaning path fixed</item>
+            <item>fix: 🐛 Display condition's menu item selection</item>
+        </fix>
+        <change>
+            <item>feat: 🎸 Builder version added to migrate legacy pages.</item>
+            <item>style: 💄 added page's builder version number on admin list</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.0.2</version>
+        <fix>
+            <item>fix: 🐛 Form Element's math captcha</item>
+            <item>fix: 🐛 Blurb Icon's background color on preview</item>
+            <item>fix: 🐛 Form element required field validation</item>
+            <item>fix: 🐛 Background gradient color radial options does not work</item>
+            <item>fix: 🐛 Repeat welcome message</item>
+            <item>fix: 🐛 Background image parallax does not show</item>
+            <item>fix: 🐛 BoxShadow style and mobile css value merge conflict</item>
+            <item>fix: 🐛 forms and tabs element style fixed</item>
+            <item>fix: 🐛 data migration of form and divider update</item>
+            <item>fix: 🐛 tab element php warning fixed</item>
+            <item>fix: 🐛 admin menu, admin module, language and broken links</item>
+            <item>fix: 🐛 Gallery data migration</item>
+            <item>fix: 🐛 Google fonts delay loading</item>
+            <item>fix: 🐛 Form element alert style</item>
+            <item>fix: 🐛 Flip-box element bg image</item>
+            <item>fix: 🐛 Section bg overlay blur and lazy</item>
+            <item>fix: 🐛 Flipbox animation fix</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.0.2</version>
+        <fix>
+            <item>style: 💄 Animated Header svg icon changed</item>
+            <item>style: 💄 Legacy css updated</item>
+            <item>fix: 🐛 Elements responsive disable option not working</item>
+            <item>fix: 🐛 Box shadow not showing</item>
+            <item>fix: 🐛 Admin module license activation warning</item>
+            <item>fix: 🐛 Delay loading css missing styles</item>
+            <item>fix: 🐛 My templates list not showing</item>
+            <item>fix: 🐛 My templates old items not inserting</item>
+            <item>fix: 🐛 Method not found renderQuixItem</item>
+            <item>fix: 🐛 Form Element's math captcha</item>
+            <item>fix: 🐛 Image optimization bug due to server configuration fixed</item>
+        </fix>
+        <change>
+            <item>feat: 🎸 JMedia updated 1.4.0</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.0.1</version>
+        <fix>
+            <item>💄 Empty section style fixed</item>
+            <item>🐛 Icon list element style fixed</item>
+            <item>🐛 Column element background style fixed</item>
+            <item>🐛 Fixed bug on welcome guide showing always.</item>
+            <item>🐛 Menu element style bug fixed</item>
+            <item>🐛 Blurb element icon style bug fixed</item>
+            <item>🐛 Element padding/margin bug fixed</item>
+            <item>🐛 Image loading bug fixed</item>
+            <item>🐛 Column reverse bug for mobile view</item>
+            <item>💄 Style fix for layouts selection grid</item>
+            <item>🐛 Fix gallery element layout rendering problem</item>
+            <item>💄 Text element alignment justify typo fixed</item>
+            <item>🐛 Column element auto-opening modal fixed</item>
+            <item>🐛 Free version builder's missing section, row fixed</item>
+            <item>🐛 Column padding fixed from row settings</item>
+            <item>🐛 Element spacing of column does not work</item>
+            <item>🐛 Section default spacing fixed and padding, margin 0</item>
+            <item>🐛 column width, activation PHP warning, builder style</item>
+            <item>🐛 Social icon element layout and style issue is fixed</item>
+            <item>🐛 Alignment and float style fixed for all element</item>
+            <item>🐛 Icon list element horizontal layout issue fixed</item>
+            <item>🐛 Image path fixed and image cache disabled on debugging</item>
+            <item>🐛 Complex image relative path and gallery element fixed</item>
+            <item>🐛 Page migration fetal error fixed for responsive</item>
+            <item>🐛 Form element options and style fixed</item>
+            <item>🐛 Bootstrap legacy css added</item>
+            <item>🐛 Call to action, Joomla article and Joomla articles element bug fixed</item>
+            <item>🐛 Image function php warning fixed</item>
+            <item>🐛 paste element on empty column fixed</item>
+            <item>🐛 improved legacy code</item>
+            <item>🐛 Image directory name spacing conflict for optimization</item>
+            <item>🐛 Edit page url routing fixed</item>
+            <item>🐛 Fix image permission and routing</item>
+            <item>🐛 Section bg lazyload class fixed</item>
+            <item>🐛 Edit page script dependency fixed</item>
+            <item>🐛 Image url relative path fixed</item>
+            <item>💄 Installation message fixed</item>
+        </fix>
+        <change>
+            <item>refactor: 💡 all dependent codes for namespace change fixed</item>
+            <item>🐛 Init quix and classic loader improved</item>
+            <item>💡 Joomla Category field rebuild to show real time category</item>
+            <item>💡 Image optimization</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.7.5</version>
+        <fix>
+            <item>Quix Business lifetime license validation</item>
+            <item>PHP warning fixed for quix as editor</item>
+            <item>Subfolder Quix API path fixed</item>
+            <item>PHP error fixed for Quix as an Editor</item>
+            <item>Preview url routing bug fixed</item>
+            <item>SVG upload bug fixed</item>
+            <item>Relative URL routing fixed for link</item>
+        </fix>
+        <change>
+            <item>[Video Carousel Element] Allowfullscreen feature for YouTube</item>
+            <item>[Smart Tab Element] Multiple uses in a page</item>
+            <item>[Form Element] recaptcha Typo</item>
+            <item>JCH conflict resolver improved</item>
+            <item>Filemanager updated to latest to avoid mimetype namespace bug</item>
+            <item>Unused script removed from elements</item>
+            <item>AMP view jch conflict fixed by auto configuring excluded url format=amp</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.7.4</version>
+        <fix>
+            <item>[Form Element] Captcha Fixed for validation and mobile auto trigger</item>
+            <item>[Quix Editor] Thirdpary component conflict fixed</item>
+            <item>Typo fixed on installation view</item>
+            <item>License validation fixed</item>
+        </fix>
+        <change>
+            <item>Cross-Device grid support improved for visual builder</item>
+            <item>[Quix Editor] Virtuemart support</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.7.3</version>
+        <fix>
+            <item>[CORE] undefined object warning fixed for editor</item>
+            <item>[CORE] Editor context update to avoid with modules</item>
+            <item>[CORE] builder pro layout auth notice and activation url fixed</item>
+            <item>[CORE] New section layout messy loading improve</item>
+            <item>[CORE] id warning fixed for js from text input</item>
+            <item>[CORE] page css loading issue fixed for safari and ie</item>
+            <item>[Smart Tab] html syntex fixed</item>
+            <item>[Form Element] Email CC and BCC option fixed for email2</item>
+            <item>[Form element] after form submit not resetting all inputs value</item>
+            <item>[Form element] Checkbox multiple value bug fixed</item>
+            <item>[Person Element] Description text field display issue</item>
+            <item>[Person Pro Element] element link issue with style overlay fix</item>
+        </fix>
+        <addition>
+            <item>[Accordion Element] New FAQ Schema markup added</item>
+            <item>[Counter Element] New option for  onload countdown starting</item>
+            <item>[File Manager] New Support for Gif,bmp,webp,movie,vob and 3gp</item>
+            <item>[Builder] Force ltr mode for builder</item>
+        </addition>
+        <change>
+            <item>[SVG] Color remove option to use raw color</item>
+            <item>[CORE] Schema for editor map with migration script</item>
+            <item>[CORE] blocks &amp; templates style update</item>
+            <item>[QuixAMP] Code updated</item>
+            <item>[QuixRank] SEO checker content block updated</item>
+            <item>[Image Element] Icon color option updated</item>
+            <item>[File Manager] SVG icon preview</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.7.2</version>
+        <fix>
+            <item>[CORE] php warning fixed for not object count</item>
+            <item>[QuixAMP] AMP to Page Canonical URL fixed</item>
+            <item>[QuixAMP] Sidebar Routing fixed</item>
+            <item>[QuixAMP] AMP-Video missing script added</item>
+            <item>[QuixEditor] Module builder context conflict fixed</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.7.1</version>
+        <fix>
+            <item>[QuixRank Fix] SEO Title not changing to green</item>
+            <item>[Pricing Table Element] Duration switcher text updated</item>
+            <item>[Advanced Heading Elements] Fix bg text margin issue and bg text switcher</item>
+            <item>Media Manager modal fix</item>
+            <item>QuixRank Sidebar fix</item>
+            <item>PHP mkdir replace with joomla folder create for warning</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.7.0</version>
+        <fix>
+            <item>[Quix Optimize] Original image resize issue fixed to ration</item>
+            <item>[Blurb Element] Fix image width problem</item>
+            <item>[Media Elements] Fixed layout responsive problem for (gallery, image, testimonial carousel, video, video) carousel, video pro</item>
+            <item>[Quix AMP] Head link added instead of meta content</item>
+        </fix>
+        <addition>
+            <item>new Smart Tab Element</item>
+            <item>new Dual Button Element</item>
+            <item>new Pricing Element</item>
+            <item>New Advance Heading Element</item>
+        </addition>
+        <change>
+            <item>[Button Element] Border &amp;&amp; scroll offset added</item>
+            <item>[Gallery Element] New responsive grid options</item>
+            <item>[Testimonial Carousel] Improved configuration system of media and quote show/hide</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.6.2</version>
+        <fix>
+            <item>Image loading issue fixed for Blurb, Image &amp; icon, Gallery and Testimonial</item>
+            <item>Video Pro height issue</item>
+            <item>Testimonial Carousel default value fixed for quatation.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.6.1</version>
+        <fix>
+            <item>Fixed issue : Builder not loading</item>
+            <item>Admin Dashboard model warning fixed</item>
+            <item>[Video Pro Element] Icon position fixed</item>
+            <item>[MediaCarousel Element] Fixed the title, caption, outside arrow nav,overlay animation and alignment options</item>
+            <item>[Image Element] Fix image width max value</item>
+        </fix>
+        <change>
+            <item>[Gallery Element] Added responsive grid control, Filter button styles, New masonry layout and Overlay title-caption styles</item>
+            <item>[Button Element] Added new border type</item>
+            <item>[Blurb Element] Added background and border for image and icon</item>
+            <item>[Testimonial Carousel] Added grid layout, Image control, Items styles, Image border and Added Quotation</item>
+            <item>[Slider Pro] Added bar navigation + button icon</item>
+            <item>[Accordion Element] Added collapse option for first item</item>
+            <item>[MedicaCarousel Element] Added content and caption styles</item>
+            <item>[Form Element] Captcha validation improved</item>
+            <item>[Person Element] Add border, padding for image</item>
+            <item>[Image Element] Improve media border, caption border, caption background and icon styles</item>
+            <item>[VideoPro Element] Improved its options and control</item>
+            <item>Developer: svg fields style will be removed from core</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.6.0</version>
+        <fix>
+            <item>Section/Element disable enable visibility fixed</item>
+            <item>[Accordion Element] all items collapsable issue fixed</item>
+            <item>[Shortcode Editor Modal] insert error fixed for all editor</item>
+            <item>Color Picker input height fix</item>
+            <item>Element Duplicate id fixed</item>
+            <item>Section drag extra zoom-off fixed</item>
+            <item>Missing quix.css loaded for builder</item>
+            <item>Section Background script error fixed</item>
+            <item>Multiple API call fixed for google fonts</item>
+            <item>[Image] Fixed force width to 100% to auto</item>
+            <item>[Image Compare Element][Classic] fix for style break</item>
+            <item>[Pie Counter Element][Classic] Trigger pre animation waiting</item>
+            <item>[Joomla Articles] Button bg style fix for hover</item>
+            <item>[Slider Pro] Responsive content width fixed</item>
+            <item>[Slider Pro] Dot nav position fixed to center</item>
+            <item>[Slider Pro] Title twig parsing fix</item>
+            <item>[Media Carousel] Fixed for outside nav</item>
+            <item>[Media Carousel] Caption added for both overlay and no-overlay style</item>
+            <item>[Form] Parsed new line from input</item>
+            <item>[Blurb] Img caption added</item>
+            <item>[Modal] Position fixed to center</item>
+            <item>PHP warning undefined label fixed</item>
+            <item>Date picker auto close issue fixed</item>
+            <item>New Section Template fixed to one section</item>
+        </fix>
+        <addition>
+            <item>AMP Implementation (Pro only)</item>
+            <item>Repeatable Items sorting</item>
+            <item>Page save Validation Layer to prevent page crush.</item>
+            <item>More then 400% Builder performance improved</item>
+            <item>Add New section from section settings</item>
+        </addition>
+        <change>
+            <item>Undo-Redo improved.</item>
+            <item>Column resizer improved.</item>
+            <item>[Drag &amp; Drop] Firefox support added.</item>
+            <item>Assets rendaring improved to support joomla system cache</item>
+            <item>[Slider Pro] element navigation for AMP</item>
+            <item>Section modal style and filter improved</item>
+            <item>Large screen sections modal width increased</item>
+            <item>API level browser-cache to improve builder loading time</item>
+            <item>Rendering module reshuffled [same as module settings]</item>
+            <item>Section templates list view improved</item>
+            <item>Renamed: Magical Resizer to Grid Reset</item>
+            <item>SEO assistance style improved.</item>
+            <item>Google font's missing weight fixed</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.5.6.1</version>
+        <fix>
+            <item>Frontend PHP warning fixed</item>
+            <item>Social icon and Icon-list element styles reset</item>
+            <item>Builder color Alignment fixed</item>
+            <item>Modal expand mode double click fixed</item>
+            <item>Quix as Editor fixed for Article and Module</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.5.6</version>
+        <fix>
+            <item>Element css missing on cache fixed</item>
+            <item>Image path issue fixed</item>
+            <item>Max value 100 set for all % unit for settings field</item>
+        </fix>
+        <addition>
+            <item>170+ all new prebuilt sections library</item>
+            <item>[Builder] Editor modal Expand Mode</item>
+            <item>[Builder] New Documentation inlcuded for all element inside builder</item>
+            <item>[Builder] Joomla Image folder path changing support</item>
+        </addition>
+        <change>
+            <item>[Builder] Code formating and debug info update</item>
+            <item>[Builder] Media preview improved on editor modal</item>
+            <item>[Builder] Toolber UI Improved</item>
+            <item>[Builder] Fonts loading and font-data storing</item>
+            <item>[Sections] Library tag ordering by Alphabet</item>
+            <item>[Sections] Filter by single category</item>
+            <item>Dynamic caching improved</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.5.5</version>
+        <fix>
+            <item>[Accordion Element] Fix the icon color issue from style tab</item>
+            <item>[Video Pro Element]: Video and placeholder image height and modal close issue fix</item>
+            <item>[Gallery Element] filter and default filter select</item>
+            <item>Api undefined index issue fixed</item>
+            <item>Preview page Edit button indexing issue fixed</item>
+            <item>ColorPicker overflow bottom fixed</item>
+        </fix>
+        <addition>
+            <item>Section copy paste to anywhere [No hardtime to move section ;)]</item>
+            <item>[Performance] Load assets only once for all items in a page</item>
+            <item>Quix Image optimise checking fallback</item>
+            <item>CSS Library updated</item>
+        </addition>
+        <change>
+            <item>code clean up for production</item>
+            <item>[Blurb Element]: add link on the icon</item>
+            <item>[Video Carousel Element] Video default height</item>
+            <item>[Video element] viewport height removed for overheiht issue</item>
+            <item>[Builder] All Alignment/Choose field responsive switcher</item>
+            <item>[Builder] Section stretch mode when resized improved</item>
+            <item>[WOW JS] will not load default from now</item>
+            <item>[Classic] bundle.js for classic has new always defer</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.5.4</version>
+        <fix>
+            <item>Joomla form update caused bug fixed about form fields</item>
+            <item>[Image Optimization] api update to track small images</item>
+            <item>[Page Settings] Image Optimization value checking fixed</item>
+            <item>Admin Sidebar loading flick issue fixed</item>
+            <item>Override new element fixed</item>
+            <item>Active license missing value on some site issue fixed</item>
+            <item>Media element icon link issue fixed</item>
+            <item>Form Captcha enable disable issue fixed</item>
+        </fix>
+        <addition>
+            <item>[My Templates] New Option settings like page</item>
+            <item>[My Templates] New QuixRank Option added</item>
+            <item>[Performance] Global option to set css loading preference.</item>
+            <item>[Form Element] Server side form validation added</item>
+            <item>[New Element] Person Pro, Video Carousel</item>
+            <item>Quix page rendering speed improved</item>
+            <item>Quix page size reduced</item>
+            <item>Classic fallback CSS removed from Visual builder</item>
+        </addition>
+        <change>
+            <item>Multiple http request reduced</item>
+            <item>CSS Library Improved</item>
+            <item>Admin Interface performance improved</item>
+            <item>Prebuild Templates [sections and pages] tag filter improved</item>
+            <item>Compile CSS has now validation for missing css</item>
+            <item>Element update: accordion, countdown, joomla-article,</item>
+            <item>Element update: media-carousel, slider-pro, video-pro</item>
+            <item>Element update: joomla articles</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.5.3</version>
+        <fix>
+            <item>default params warning fixed for undefined index</item>
+            <item>admin preparecontent event fixed</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.5.2</version>
+        <fix>
+            <item>[Form element] Fixed bcc, cc options</item>
+            <item>[SEO] dummy image for image src removed for seo</item>
+            <item>[Image] Trimmed url to avoid double slash</item>
+            <item>cache cleaner warning fixed</item>
+            <item>[SEO] site attributes meta fix</item>
+            <item>webp srcset php warning fixed</item>
+        </fix>
+        <addition>
+            <item>[Core] Joomla Debug profile implement</item>
+            <item>[Form Element] Email subject will accept form shortcode</item>
+            <item>[Form Element] Reply to from Users Input</item>
+            <item>[image optimization] Mini size image as default</item>
+            <item>[Builder] Preview mode added to avoid cache conflict</item>
+        </addition>
+        <change>
+            <item>[Builder] Auto reload only after item save</item>
+            <item>[Element] Divider field type : reset and help value</item>
+            <item>[Image optimization] slow server optimization improved</item>
+            <item>[image optimization] Image sizes field removed</item>
+            <item>[Gallery Element] Default image height unit set to %</item>
+            <item>[Builder] Return url encode fix</item>
+            <item>[Form Element] email sender improved to filter properly</item>
+            <item>[QuixRrank] preview info update and broken link fixed</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.5.1</version>
+        <fix>
+            <item>[JCH Fix] removed and fixed by DocType</item>
+            <item>[Installation Bug] QuixHelper not found fixed</item>
+            <item>[Library Editor] Item not saved warning fixed</item>
+            <item>[Element Modal UI] Fields group arrow icon fix</item>
+            <item>[Form Element] Fixed recaptcha validation issue</item>
+            <item>[Core Lang] Missing lang added</item>
+            <item>[Slider Pro] IE image loading issue fixed</item>
+        </fix>
+        <addition>
+            <item>[Slider Pro] advanced style customization and effects</item>
+            <item>[Visual Builder] DocType to Quix for Independent work</item>
+        </addition>
+        <change>
+            <item>[Slider Pro] Content: Background Color, Margin, Width, Border</item>
+            <item>[Slider Pro] Arrow Navigation: Icon Hover Color, Arrow Nav Space, Arrow Space, Background Color, Border, Padding</item>
+            <item>[Slider Pro] Dot Navigation: Background Color, Border, Padding</item>
+            <item>[Slider Pro] Content Alignment: Text Alignment, Horizontal Alignment, Verticle Alignment</item>
+            <item>[Slider Pro] Overlay: Enable/Disable</item>
+            <item>[Slider Pro] Kenburns Effect</item>
+            <item>[Slider Pro] Content Transitions</item>
+            <item>[Slider Pro] Content Parallax</item>
+            <item>[Slider Pro] Add percentage to the Content padding</item>
+            <item>[Joomla Article] Meta icon updated</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.5.0</version>
+        <fix>
+            <item>[Optimize Image] Image format uppercase issue fixed</item>
+            <item>[Column Element] Button Options and width fixed</item>
+            <item>Builder style fixed for Firefox</item>
+            <item>PHP warning and notice fixed</item>
+            <item>Fixed placeholder issue for dimension</item>
+            <item>Classname conflict with other extension fixed</item>
+            <item>Image caption padding fields value fixed</item>
+            <item>Filemanager old version warning removed</item>
+        </fix>
+        <addition>
+            <item>Style Copy Paste for same element</item>
+            <item>Context menu [Right click]</item>
+            <item>[Form Element] Invisible Captcha + Match captcha support</item>
+            <item>[Button Element] New hover color for icon</item>
+            <item>[Open Street Map Element] Basic Map</item>
+            <item>[Core] Element overriding for visual builder</item>
+            <item>[Image Element] Image Caption and style</item>
+            <item>[Blurb Element] Title hover color option</item>
+            <item>[Media Carousel] Image caption and title showing option</item>
+            <item>[Gallery Element] Title, Caption &amp; Overlay options added</item>
+            <item>[New] JCH/AdminTools auto fixing control option</item>
+        </addition>
+        <change>
+            <item>Module rendering</item>
+            <item>Drag n Drop now smooth and quicker</item>
+            <item>Quix Modal fields group collapse icon</item>
+            <item>[Typography] Default lineheight removed from typography and css</item>
+            <item>[License] Validation process updated using js to avoid server request blocking</item>
+            <item>[Button Element] Options for icon color</item>
+            <item>[Classic][SliderPro] Custom height improved to hide overlapping</item>
+            <item>[Classic] Builder col-wrapper css update</item>
+            <item>[Video Element] Element position fixed</item>
+            <item>Builder mode added qx parent class to match builder preview</item>
+            <item>Redirect to page preview on builder closing</item>
+            <item>Admin quick icon updated</item>
+            <item>Visual Builder style improved</item>
+            <item>Style codebase organized</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.4.4</version>
+        <fix>
+            <item>Chrome for Windows section overlapping for settings fix</item>
+            <item>Responsive value changing on windows fixed</item>
+        </fix>
+        <addition>
+            <item>[Media Carousel Element] New option for link media item</item>
+            <item>[Blurb Element] New option for Image and Title position</item>
+        </addition>
+        <change>
+            <item>[Video Element] default video config update</item>
+            <item>Toolbar grid structure for cross device</item>
+            <item>Base64 Logo removed to avoid confusion</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.4.3</version>
+        <fix>
+            <item>[Slider Pro] Responsive and custom-height alignment issue fixed.</item>
+            <item>[Gallery] Filter option updated.</item>
+            <item>[My Element] Duplicate ID issue fixed.</item>
+            <item>[Responsive] Fixed slider-fields responsive issue.</item>
+            <item>[SEO] Meta image not showing issue fixed..</item>
+            <item>[Testimonial Carousel] Internet Explorer fixed.</item>
+            <item>DocType checking before adding core scripts.</item>
+            <item>Video bg opacity fixed.</item>
+            <item>Quix Pro update site url fixed for free package.</item>
+        </fix>
+        <addition>
+            <item>[ACL] ACL implenmented on Section, Row, Column, and Elements.</item>
+            <item>[Media Manager] Support for GIF and MOV added.</item>
+            <item>[New Pro Element] Video Pro.</item>
+        </addition>
+        <change>
+            <item>[Person Element] Image width control added.</item>
+            <item>[Image] Default image width added for Blurb, Call2Action, and Image element.</item>
+            <item>[Button] Smooth Scroll option added for button element.</item>
+            <item>[IE] Improved styles for Internet Explorer and added options for fix.</item>
+            <item>[Animated Header] Grid, alignment and position style improved for Animated header.</item>
+            <item>[Style] Core css added to improve some output.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.4.2</version>
+        <fix>
+            <item>[Classic][Filemanager] Fixed drag and drop issue</item>
+            <item>[Joomla Articles] Meta icons fix</item>
+            <item>[Slider Pro] Title tag filter</item>
+            <item>[Gantry] fix from github help channels</item>
+            <item>[Quix] Quix Inside quix item render styles fix</item>
+            <item>Background Overly fixed when opacity 0</item>
+            <item>schema script update fixed for custom db prefix</item>
+            <item>Override elements conflict with visual builder</item>
+        </fix>
+        <addition>
+            <item>[w3c validator] Removed empty attr from core js/css link</item>
+            <item>[w3c validator] Removed script defer from inline script</item>
+            <item>[w3c validator] Parallax markup to data markup</item>
+            <item>[w3c validator] [Image] Dummy src for image validation</item>
+            <item>[w3c validator] [Image] Lazy Loading tag update</item>
+        </addition>
+        <change>
+            <item>[QuixOptimize] Image optimization api miltiple request</item>
+            <item>[Heading Element] * selector removed and tag added</item>
+            <item>[Uikit] Updated to latest 3.0.3</item>
+            <item>Final output filter removed for Core output</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.4.1</version>
+        <fix>
+            <item>[QuixOptimize] Helper path fix</item>
+            <item>[Classic] Async Loader conflict fixed</item>
+            <item>Admin assets relative path fix</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.4.0</version>
+        <fix>
+            <item>[Slider Pro] Responsive display fix for Slider</item>
+            <item>[Classic] Column element flow fix</item>
+        </fix>
+        <addition>
+            <item>QuixOptimize for Image [Responsive Image : compress, resize, srcset, sizes]</item>
+            <item>Image lazyload</item>
+            <item>Webp Image format support</item>
+            <item>New Dashboard introduced</item>
+        </addition>
+        <change>
+            <item>[classic] animate.css new version</item>
+            <item>Few improvements on column and section</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.3.4</version>
+        <fix>
+            <item>[Media Carousel] img alignment fix</item>
+            <item>[Media Carousel] Image width-height fixed</item>
+            <item>[Form Element] Date dependent field removed from config</item>
+            <item>[Classic][Joomla Article] Content prepare event updated</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.3.3</version>
+        <fix>
+            <item>[Common][IE] Column Layout Selection fix for IE/Safari</item>
+            <item>[Slider Element][IE] Object fit image fixed for IE/Edge</item>
+            <item>[Classic] All blocks API url migrated to https</item>
+            <item>[Map Element] Broken output fixed by fixing init zoom value</item>
+        </fix>
+        <addition>
+            <item>[Form Element] New field date, time, datetime-local</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.3.2</version>
+        <fix>
+            <item>[Common] Warning fixed for font-family file isn't exist</item>
+            <item>[Common] Preview page php wanring fixed for css</item>
+            <item>[QuixRank] SEO negative score</item>
+            <item>[classic] [Blurb Element] Media position fixed on hover</item>
+            <item>[Spacer Element] visual refresh on builder</item>
+            <item>[Form Element] Select field missing class added</item>
+            <item>[Filemanager] Icon and unsplash tab showing issue</item>
+            <item>[SEO] Image path fixed</item>
+            <item>[Google Map]Height and Zooming</item>
+            <item>[Astroid framework] Text editor dependency for Bootstrap</item>
+            <item>[CONFLICT] PATH_ROOT variable conflict with JReview</item>
+            <item>[Testimonial Carousel] Name and Position Alignment</item>
+        </fix>
+        <addition>
+            <item>[All] JavaScript Parallax option for background</item>
+            <item>[Common] Auto load preview when saved a page</item>
+            <item>[Button Element] Text alignment option for full-width button</item>
+            <item>[Alert Element] Close option</item>
+            <item>[Form Element] Beautiful email output</item>
+            <item>[Countdown Element] Mobile view grid control</item>
+            <item>[Column] reverse option for Mobile</item>
+            <item>[classic] [Article Element] Introtext Content event</item>
+            <item>[Classic] Rocket loader async</item>
+        </addition>
+        <change>
+            <item>[SEO] Open Graph meta data structure updated to latest</item>
+            <item>[Cache] Version added to page stylesheet and script for caching conflict</item>
+            <item>[Articles Element] Category sef url fixed</item>
+            <item>[Countdown Element] Divider hide on mobile</item>
+            <item>[Common] Relative links on Text Editor</item>
+            <item>[Common] Cached clean when config updated</item>
+            <item>[Common] Textarea height controlling enabled</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.3.1</version>
+        <fix>
+            <item>Row verticle alignemnt fixed for responsive settings</item>
+            <item>Fonts console warning removed</item>
+            <item>Webfont script error fix for no fonts</item>
+            <item>Social icon element list inline class fixed</item>
+        </fix>
+        <change>
+            <item>[new] Typography new unit added : rem</item>
+            <item>Code Organised for builders</item>
+            <item>Google Webfont version updated</item>
+            <item>Webfonts script will not load if not needed</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.3.0</version>
+        <fix>
+            <item>[classic] Video BG Fixed</item>
+            <item>[classic] Filemanager video selection fix</item>
+            <item>[classic] Fix bar counter width</item>
+            <item>[classic] Fix image is not found issue when select any video from filemanager</item>
+            <item>Builder elements width overflow fixed</item>
+            <item>Testimonial carousel grid fix</item>
+            <item>Divider responsive builder break issue fixed</item>
+            <item>SVG Selection and output with code sign fix</item>
+        </fix>
+        <addition>
+            <item>SEO Feature</item>
+        </addition>
+        <change>
+            <item>Classic blurb hover media and hover bg</item>
+            <item>RocketLoader fixed</item>
+            <item>New option for article elements : title hover</item>
+            <item>New option for slider pro : custom height</item>
+            <item>Fixed message of loading time</item>
+            <item>Joomla articles element improved and better box stylings</item>
+            <item>Joomla articles SEF url update</item>
+            <item>Optimised toolber view</item>
+            <item>Loading priority moved script at bottom</item>
+            <item>ItemRendering optimised</item>
+            <item>Heading element text wrapped with span and default bg-color for text bg</item>
+            <item>Admin page list page access and language title update</item>
+            <item>Migrate schema button moved to save menu dropdown</item>
+            <item>Old js jquery live dependency updated</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.2.3</version>
+        <fix>
+            <item>New joomla update fix for changing page state https://github.com/joomla/joomla-cms/pull/22851</item>
+            <item>Form field acceptence text filter for link fixed</item>
+            <item>Google map origin error fixed on builder mode</item>
+            <item>LoadGlobalStyle js warning fixed</item>
+            <item>Error fixed when saving an item in the Template Library</item>
+        </fix>
+        <change>
+            <item>New font-display added for Quix fonts for SEO page visibility</item>
+            <item>Default view params and new jaccess checked update</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.2.2.1</version>
+        <fix>
+            <item>Duplicate function name fix</item>
+            <item>Heading element default value fix for enable hover</item>
+        </fix>
+        <change>
+            <item>Clean cache on installation</item>
+            <item>New button to clean cache all together from Help page</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.2.2</version>
+        <fix>
+            <item>BG reset js warning fixed</item>
+            <item>Defer tag fixed for builder script</item>
+            <item>Fixed empty default value coz error on builder</item>
+            <item>String type warning fixed for layout edit</item>
+        </fix>
+        <addition>
+            <item>Visual Builder's assets (CSS/JS) cached</item>
+            <item>New filemanager for classic builder</item>
+        </addition>
+        <change>
+            <item>Page cache improved for visual-builder</item>
+            <item>person elements designation label update</item>
+            <item>Heading element new option for text background</item>
+            <item>Finder plugin summery and body text limit applied</item>
+            <item>New name tag option for classic builder testimonial</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.2.1</version>
+        <fix>
+            <item>Installation pkg php warning fixed</item>
+            <item>LoadGlobalStyles loaded at last to avoid undefined error</item>
+            <item>Video elements width height options fixed</item>
+            <item>[Classic] Article element fix for article not found exception</item>
+            <item>Joomla articles element class name fix</item>
+            <item>Fixed default value and string case to avoid library items issue</item>
+        </fix>
+        <addition>
+            <item>New joomla article element</item>
+        </addition>
+        <change>
+            <item>Double call removed for system plugin for Assets</item>
+            <item>Slider pro fonts moved to less files to maintain priority from elements settings</item>
+            <item>Counter element countdown update on enter visible area</item>
+            <item>Default global typo value updated</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.2.0</version>
+        <fix>
+            <item>Pie counter is now working on the Quix 2.1.9 [classic builder]</item>
+            <item>Edit from pagelist path is fixed</item>
+            <item>Empty page list dropdown is fixed</item>
+            <item>Section insert from https not working issue is fixed</item>
+            <item>Page insert https warning fixed</item>
+            <item>Section height control and alignment fixed for Mobile view</item>
+            <item>Custom Width container padding fixed</item>
+            <item>Slider pro placeholder image removed if no image is inserted</item>
+            <item>Slider pro thumb and alignment issue fixed on builder</item>
+            <item>Exception update for Google font list empty array</item>
+            <item>Blurb Element alignment title fixed</item>
+            <item>The bug of Module element select search is fixed</item>
+            <item>PHP warning fixed for undefined index on responsive value</item>
+            <item>Icon-list elements hover color fixed</item>
+            <item>Image elements caption fixed</item>
+            <item>Map elements config breaking issue is fixed</item>
+        </fix>
+        <addition>
+            <item>My Elements implemented for saving customized elements</item>
+            <item>Global Typo configuration for whole page</item>
+            <item>New field type jmodule implemented in module list</item>
+            <item>Loading hints added</item>
+        </addition>
+        <change>
+            <item>Page not found error set to Exception for 404</item>
+            <item>GetTemplates api security updated</item>
+            <item>Fixed file manager file path that was missing in subdomain</item>
+            <item>Button element alignment fixed and icon added</item>
+            <item>Builder toolbar/icons UI issue fixed</item>
+            <item>Style tab of Heading element &gt; all items closed issues are fixed</item>
+            <item>Quix help menu are updated with more direct docs link</item>
+            <item>Admin toolbar updated for better UI</item>
+            <item>Element module list has been given new api for realtime module list while each page loads</item>
+            <item>Elements configuration back for v1 and fixed saving bug and cache issue</item>
+            <item>Image elements are set to default unit into px</item>
+            <item>Added person elements help text for alignment control to avoid confusion</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.1.8</version>
+        <fix>
+            <item>[Classic Builder] Video Background script issue</item>
+            <item>Custom code disappeared issue from Page Settings</item>
+            <item>Add and delete column issue for styles</item>
+            <item>Fix preview js error from flement script</item>
+            <item>Video element script loading issue</item>
+            <item>Column resize problem after section drag and drop</item>
+            <item>Fixed section duplicate issue for styles</item>
+            <item>Border unit fixed</item>
+            <item>Counter element fix for last count</item>
+            <item>Section disable class fixed for last section</item>
+            <item>Fixed add new row button overlap issue</item>
+            <item>Fixed animated header</item>
+            <item>Style fix for link and modal</item>
+            <item>Form element updated for custom message and submit issue</item>
+            <item>Gallery element image url fixed</item>
+            <item>Media carousel script fixed for default value</item>
+            <item>Testimonial script fixed for default value</item>
+            <item>Class to Action style and cover options fixed</item>
+            <item>Resizer column select image on resize if i do quick resize</item>
+            <item>Fix style broken issue when duplicate</item>
+            <item>Resizer position fixed for col margin</item>
+            <item>Slider image width fix</item>
+            <item>Accordion element icon fixed</item>
+            <item>Countdown fix for datetime</item>
+            <item>Fixed export page download</item>
+            <item>Section background overlay opacity fix</item>
+        </fix>
+        <addition>
+            <item>AdminTools auto exception</item>
+            <item>New section width option</item>
+            <item>Section drag new workflow</item>
+            <item>New Columnd layout 1-5</item>
+            <item>Builder performance Optimised</item>
+            <item>Text element prepare content event</item>
+            <item>New Admin help menu</item>
+            <item>Show element name on move icon</item>
+            <item>Color remove option added</item>
+            <item>New Gallery options: filter all text, default filter</item>
+            <item>System plugin enabled warning for disabled status</item>
+            <item>Caching policy and page caching updated</item>
+        </addition>
+        <change>
+            <item>Quix error routing update</item>
+            <item>Webfont loading issue fixed for all weight</item>
+            <item>quix page title and meta set as second priority from menu</item>
+            <item>Reopen preview tab if closed</item>
+            <item>Quix Builder UI Improved</item>
+            <item>Row settings updated</item>
+            <item>Optimized html, script, style on Builder</item>
+            <item>Quix grid fully now % base</item>
+            <item>Optimised duplicate script loading</item>
+            <item>Image element height width unit responsive update</item>
+            <item>Image Element image responsive mode option</item>
+            <item>Section copy pase workflow update</item>
+            <item>Testimonial carousel element image alt text added</item>
+            <item>Slider pro and Video poster image option</item>
+            <item>Drop position style update</item>
+            <item>Tab default active bg title color</item>
+            <item>Save to library modal ui updated</item>
+            <item>Tooltip for options</item>
+            <item>Icon-list element default start icon</item>
+            <item>Filemanager optimised</item>
+            <item>Prevent page reload on click Button/Link</item>
+            <item>Button element icon spacing</item>
+            <item>Slider pro viewport height update</item>
+            <item>Social icon hover and common icon color option</item>
+            <item>Animated Headline optimised</item>
+            <item>Alignment justify added to alert, blurb, c2a, flipbox, heading, articles, person and text</item>
+            <item>Column animation on builder mode implemented</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>2.1.6</version>
+        <fix>
+            <item>Column common settings fixed</item>
+            <item>View engine fix for library item from visual to classic from module load</item>
+            <item>Fixed column resizing issue after clicking magical resizer</item>
+            <item>Item edit issue fixed from list</item>
+            <item>column settings for elements gap fixed</item>
+            <item>Parsing warning from php library fixed</item>
+            <item>Grid margin/padding overlap issue fixed</item>
+            <item>Image with overlap fixed</item>
+            <item>Fixed warning before page load</item>
+            <item>Fixed editor link edit modal issue</item>
+            <item>Animated header multiple instance fix</item>
+            <item>Animated header font issue fixed</item>
+            <item>Warning removed from admin dashboard</item>
+        </fix>
+        <addition>
+            <item>Pro users can get support from admin</item>
+            <item>New heartbeat api to save your time</item>
+            <item>Icon list element option to add common icon</item>
+            <item>New Title bg option for tab element</item>
+            <item>New easyblog events for list view and featured view</item>
+        </addition>
+        <change>
+            <item>Quix module update</item>
+            <item>UI update for fisrt starting</item>
+            <item>Form elements optimised</item>
+            <item>Improved column structure for elements list item</item>
+            <item>Finder plugin event optimized</item>
+            <item>Live api call on every 5 min</item>
+            <item>Language option all added to page settings</item>
+            <item>Section insert fails error warning added</item>
+            <item>Tab elements style reset</item>
+            <item>Section builder interface improved for responsive test</item>
+            <item>Builder ui improved for t3</item>
+            <item>New schema button for old pages only</item>
+            <item>Content plugin unused loading off from core</item>
+            <item>Move elements icon width updated</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.6.7</version>
+        <change>
+            <item>Contact form element placeholder added</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.6.6</version>
+        <fix>
+            <item>Integration fix</item>
+            <item>Drop cap alignment issue fix.</item>
+            <item>Remove unused language file.</item>
+        </fix>
+        <change>
+            <item>Blurb link feature added.</item>
+            <item>Social element link new tab added.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.4.4</version>
+        <fix>
+            <item>Text-uppercase issue fixed</item>
+            <item>Contact form element ajax format params added</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.3.7</version>
+        <fix>
+            <item>Filtarable gallery fix for tab</item>
+            <item>Ajax output improved for plugins and elements</item>
+            <item>Smart search index fix for  Joomla Articles element</item>
+        </fix>
+        <addition>
+            <item>[Feature] Custom code option for quix page</item>
+            <item>Custom extension shortcode support from config</item>
+            <item>JU Directory support added for shortcode</item>
+            <item>Options to load quix assets globally to avoid conflict css.</item>
+        </addition>
+        <change>
+            <item>No cache if quix dev mode on</item>
+            <item>Quix page cache joomla core support</item>
+            <item>Wuixtrap normalizer fix</item>
+            <item>Wowjs initialize turn on/off option from system plugin</item>
+            <item>Dependency composer update</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.3.6</version>
+        <fix>
+            <item>Joomla Article element fix for FInder</item>
+        </fix>
+        <addition>
+            <item>Options to load or turn off font-awosome for site (front end)</item>
+        </addition>
+        <change>
+            <item>Font-awosome update to 4.7.0</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.3.5</version>
+        <fix>
+            <item>Joomla Article noimage issue fixed</item>
+            <item>undefined modified date issue fixed</item>
+            <item>finder plugin fix on save page</item>
+        </fix>
+        <change>
+            <item>Removed joomla debug html on builder page</item>
+            <item>Joomla Articles update helper</item>
+            <item>Joomla Module element update to show only published module</item>
+            <item>Joomla Single article element helper moved to class to avoid config conflict</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.3.4</version>
+        <fix>
+            <item>Assets cache problem with 3rd part plugin fixed</item>
+            <item>Not adding Quix Page Meta info into pages fixed</item>
+            <item>Admin clear cache button on click void error: fixed</item>
+            <item>offline editor fetal error: fixed host not found</item>
+        </fix>
+        <addition>
+            <item>Joomla Article Element for single article</item>
+        </addition>
+        <change>
+            <item>Quix Assets random order fixed</item>
+            <item>Google map multiple instance fixed</item>
+            <item>Assets cleaned up for each rander to avoid shortcode assets</item>
+            <item>Blocks offline files added for support and avoid bug</item>
+            <item>Admin select field's styles update</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.3.3</version>
+        <fix>
+            <item>Asset loader for miltiple rander item</item>
+            <item>test log comment</item>
+        </fix>
+        <addition>
+            <item>collection page clear cache button</item>
+            <item>System Plugin for Quix</item>
+        </addition>
+        <change>
+            <item>QuixTrap and Quix CSS loaded top of style to avoid template conflict</item>
+            <item>Asset loader for performance</item>
+            <item>quix item loading time improved</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.3.2</version>
+        <fix>
+            <item>Font family loading issue fix with legacy support</item>
+            <item>Admin notice and font style fix</item>
+        </fix>
+        <addition>
+            <item>API Protocol options for Quix Data url</item>
+            <item>Editor RTL LTR Support</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.3.1</version>
+        <fix>
+            <item>Joomla Article element class not found issue</item>
+            <item>Global content event turned off to aviad conflict!</item>
+            <item>Asset loader for collection fix for loading from shortcode</item>
+            <item>Quix Server looking time for API time set to avoid error</item>
+            <item>Collection shortcode warning: undefined $modified</item>
+        </fix>
+        <addition>
+            <item>Collection list page hearit api aplied</item>
+            <item>Collection page archive and duplicate option</item>
+        </addition>
+        <change>
+            <item>Builder loading preloader set after page load</item>
+            <item>Admin style improved</item>
+            <item>Admin Library and Element icon changed</item>
+            <item>Local Library list scroll fix</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.3.0</version>
+        <fix>
+            <item>Joomla Admin style font fix</item>
+            <item>Popupover warning fix</item>
+            <item>Unpublished item view fix</item>
+            <item>Router fix</item>
+            <item>Builder page font warning fix</item>
+        </fix>
+        <addition>
+            <item>Blocks.</item>
+            <item>SEO Enhancement Plugin.</item>
+        </addition>
+        <change>
+            <item>Assets delivery optimized.</item>
+            <item>Collection renamed to Library.</item>
+            <item>Text element update.</item>
+            <item>Performance improved.</item>
+            <item>ACL fix for Pages and Collection.</item>
+            <item>Clear cache improved.</item>
+            <item>Cloud flare async fix.</item>
+            <item>Library page improved with search.</item>
+            <item>Toolber menu optimized on page.</item>
+            <item>Admin style improved.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.2.2</version>
+        <change>
+            <item>Joomla Article element layout update</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.2.1</version>
+        <fix>
+            <item>PHP Warning fix</item>
+            <item>text element styles fix</item>
+        </fix>
+        <change>
+            <item>Pricing button custom padding option added.</item>
+            <item>Pricing button icon added.</item>
+            <item>text element font missing and interface button margin added</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.2.0</version>
+        <fix>
+            <item>Single column on Tablet screen full width fix</item>
+            <item>Element Typo fix</item>
+            <item>Button Font picker default fix</item>
+        </fix>
+        <addition>
+            <item>Quix Page now indexable by Joomla search</item>
+            <item>RTL support Slider Pro, Carousel and Testimonial Pro element</item>
+            <item>15 New Google Fonts</item>
+            <item>Virtuemart component support</item>
+        </addition>
+        <change>
+            <item>PHP version detection and display error message</item>
+            <item>Element Icons updated</item>
+            <item>Backend Interface update</item>
+            <item>Divider added for long element settins</item>
+            <item>Router improved</item>
+            <item>Fontawesome duplicate font removed</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.1.7.1</version>
+        <fix>
+            <item>Javascript error fix on builder</item>
+            <item>Last release ( 1.1.7 ) bug fix</item>
+        </fix>
+        <addition>
+            <item>Admin builder UI improved</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.1.7</version>
+        <fix>
+            <item>Collection PHP error fix</item>
+            <item>TinyMCE clik to edit fix</item>
+            <item>PHP Fatal error when collection and quix page load together</item>
+            <item>Accordion body list style fix</item>
+        </fix>
+        <addition>
+            <item>Ajax Contact Form element</item>
+            <item>Joomla content hook for text &amp; custom html element</item>
+        </addition>
+        <change>
+            <item>Admin UI</item>
+            <item>Fontawesome updated to latest version</item>
+            <item>Element search</item>
+            <item>Component ajax support</item>
+            <item>Collection shortcode showing on list page</item>
+            <item>Update system</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.1.6.1</version>
+        <fix>
+            <item>Typo fixs</item>
+            <item>Pricing element style fix</item>
+            <item>Map element default image path fix</item>
+            <item>Filtarable gallery space after comma issue fix</item>
+            <item>Page and collection permission fix</item>
+        </fix>
+        <change>
+            <item>Pricing element default style added</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.1.6</version>
+        <fix>
+            <item>Map loading api fix</item>
+            <item>CustomHTML element error</item>
+            <item>Permission checking error</item>
+        </fix>
+        <addition>
+            <item>Pricing table element</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.1.5</version>
+        <fix>
+            <item>Pie counter % color not changing</item>
+            <item>Accordion element animation</item>
+        </fix>
+        <addition>
+            <item>Map element</item>
+            <item>Pricing table element</item>
+            <item>Gallery element</item>
+            <item>Custom HTML element</item>
+            <item>Call to action element</item>
+        </addition>
+        <change>
+            <item>Changelog added to update notification bar</item>
+            <item>Joomla article element text alignment added</item>
+            <item>Bar counter animation added</item>
+            <item>Video element animation added</item>
+            <item>Pie counter animation added</item>
+            <item>Number counter animation added</item>
+            <item>Tab element margin padding added</item>
+            <item>Image style added for person element</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.1.4</version>
+        <fix>
+            <item>Modal settings scrollbar and last time visibility fix.</item>
+            <item>Icon picker icons get bigger.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.1.3.1</version>
+        <fix>
+            <item>Element list in modal margin fix</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.1.3</version>
+        <fix>
+            <item>Section, Row, Element ID reset</item>
+            <item>EasyBlog collection loading</item>
+            <item>Shortcode inside TinyMce not loading the builder</item>
+            <item>Id removed from collection render to avoide duplicate Id's</item>
+        </fix>
+        <addition>
+            <item>Icon search for icon field</item>
+            <item>Alert message style improvements</item>
+            <item>DigiCom support for collection</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.1.2</version>
+        <fix>
+            <item>Asset loading problem fixed for collection</item>
+        </fix>
+        <change>
+            <item>Codebase cleanup</item>
+            <item>Removed unnecessary fiels</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.1.1</version>
+        <fix>
+            <item>Asset loading problem</item>
+            <item>Column visibility icon</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.0.0</version>
+        <fix>
+            <item>Update problem</item>
+            <item>Page modal filter problem</item>
+            <item>Collection hit counter removed</item>
+            <item>Duplicate id in collection</item>
+            <item>Joomla multiple module loading</item>
+            <item>Input repeater bug</item>
+        </fix>
+        <addition>
+            <item>Section stretch mode</item>
+            <item>Element Manager</item>
+            <item>10 New page presets</item>
+            <item>Asset loader</item>
+            <item>Joomla Article element</item>
+            <item>Open graph settings</item>
+            <item>Multilingual</item>
+            <item>Access Control</item>
+            <item>Keyboard shortcuts</item>
+            <item>Component support for collection</item>
+            <item>Column visibility</item>
+            <item>Heartbeat API for session</item>
+        </addition>
+        <change>
+            <item>Overall UI improvement</item>
+            <item>Admin menu link</item>
+            <item>Page and collection preview from list page</item>
+            <item>TinyMCE editor enhanced</item>
+            <item>Blurb element update</item>
+            <item>Toolbar color update</item>
+            <item>Bar counter element</item>
+            <item>Slider and Slider pro element</item>
+            <item>Testimonial pro font control</item>
+            <item>Testimonial pro nav color</item>
+            <item>Accordion element margin and padding</item>
+            <item>Responsive disable for image element</item>
+            <item>Css/JS asset ordering</item>
+            <item>Image protocall checking in helper css</item>
+            <item>Multiselect option for list field</item>
+            <item>Docblock added in code</item>
+            <item>Extend config option</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.0.4</version>
+        <fix>
+            <item>Border style lable update and fixed for few element</item>
+            <item>Repeat All missing from background repeat field.</item>
+            <item>Module loading issue fix</item>
+            <item>Sticky Toolbar button spacing issue</item>
+        </fix>
+        <addition>
+            <item>Link option for carousel element</item>
+            <item>Responsive Settings and width/height control for image element.</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.0.3</version>
+        <fix>
+            <item>Carousel element resposnvie fix</item>
+        </fix>
+        <addition>
+            <item>Title input on image element</item>
+            <item>Justify alignment added on text element</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.0.2</version>
+        <fix>
+            <item>J2Store menu fix</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.0.1</version>
+        <fix>
+            <item>Carousel dot not on center</item>
+            <item>Preview icon change</item>
+            <item>Equal column responsive fix</item>
+            <item>Collection not loading inside other component</item>
+            <item>Accordion Element</item>
+            <item>Blurb Element</item>
+            <item>Icon Element</item>
+            <item>Video Element</item>
+            <item>Responsive Mode</item>
+            <item>Visibility Settings when responsive mode turn on</item>
+            <item>Css Helper class for easy styling</item>
+            <item>Section and Row Background not showing up</item>
+            <item>Image field preview width size fix</item>
+            <item>Image Element - alignment not working</item>
+            <item>Multiple Joomla module loading fix</item>
+            <item>Group Repeater fix</item>
+            <item>Fonts Bug Fix</item>
+        </fix>
+        <addition>
+            <item>Button Element border hover color added</item>
+            <item>Blurb background hover, border and hover color option added</item>
+        </addition>
+    </changelog>
+</changelogs>

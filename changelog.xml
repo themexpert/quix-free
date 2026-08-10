@@ -3,6 +3,35 @@
     <changelog>
         <element>pkg_quix</element>
         <type>package</type>
+        <version>6.2.5</version>
+        <fix>
+            <item>Fixed the builder getting stuck loading, and elements failing to render, after a cache clear.</item>
+            <item>Fixed a fatal error on PHP 8.5.</item>
+            <item>Joomla modules with scripts or widgets now render in the builder.</item>
+            <item>Imported pages now bring their images with them.</item>
+            <item>Gallery: the lightbox close button is visible on light images again.</item>
+            <item>Videos and images no longer make the page jump about while it loads.</item>
+            <item>Icon List: the Horizontal layout now applies in the builder.</item>
+            <item>Element settings tabs now keep showing which tab you are on.</item>
+            <item>Fixed the Advanced tab failing to open on some elements.</item>
+            <item>Fixed missing and lowercase labels in the builder.</item>
+        </fix>
+        <addition>
+            <item>Release notes now open straight from Joomla's Update screen.</item>
+            <item>Joomla Module element: choose whether the module shows its title.</item>
+            <item>The SEO panel now tells you when the SEO Site Attributes plugin is switched off.</item>
+        </addition>
+        <change>
+            <item>Google Fonts no longer hide your text while they load.</item>
+            <item>Self-hosted font mode stops contacting Google entirely.</item>
+            <item>Clearing the Quix cache now also refreshes the builder, so fixes apply straight away.</item>
+            <item>Tidier, more compact Layers panel and a clearer active tab in element settings.</item>
+            <item>Updated the bundled JMedia media manager to 1.6.2.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
         <version>6.2.4</version>
         <security>
             <item>Fixed unauthenticated page creation via a bare CSRF token.</item>

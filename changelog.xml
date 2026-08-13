@@ -3,6 +3,14 @@
     <changelog>
         <element>pkg_quix</element>
         <type>package</type>
+        <version>6.2.6</version>
+        <fix>
+            <item>Images no longer shrink to a small square or lose their shape.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
         <version>6.2.5</version>
         <fix>
             <item>Fixed the builder getting stuck loading, and elements failing to render, after a cache clear.</item>

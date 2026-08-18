@@ -3,6 +3,31 @@
     <changelog>
         <element>pkg_quix</element>
         <type>package</type>
+        <version>6.2.7</version>
+        <security>
+            <item>Fixed a SQL injection vulnerability in the Joomla Articles element.</item>
+            <item>Blocked unauthorised changes to session and cookie data.</item>
+            <item>Updated bundled libraries with the latest security fixes.</item>
+        </security>
+        <fix>
+            <item>The media manager now opens on multilingual sites.</item>
+            <item>Joomla Articles: articles show again when Child Category Articles is off.</item>
+            <item>Template preview now opens the right page on multilingual sites.</item>
+            <item>Installing and updating Quix from the Joomla command line now works.</item>
+        </fix>
+        <addition>
+            <item>Joomla Articles: pick several categories at once.</item>
+            <item>Media manager problems now show up in Debug / Error Logs.</item>
+        </addition>
+        <change>
+            <item>Clearing Joomla's cache now clears the Quix cache too.</item>
+            <item>The builder responds quicker on sites using search engine friendly URLs.</item>
+            <item>Refreshed the admin screens and imagery for Quix 6 with a lighter, cleaner look.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
         <version>6.2.6</version>
         <fix>
             <item>Images no longer shrink to a small square or lose their shape.</item>

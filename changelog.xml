@@ -3,6 +3,19 @@
     <changelog>
         <element>pkg_quix</element>
         <type>package</type>
+        <version>6.2.8</version>
+        <fix>
+            <item>The builder now opens and saves on sites installed in a subfolder.</item>
+            <item>Old or mistyped Quix links now show Page Not Found instead of an error page.</item>
+        </fix>
+        <change>
+            <item>Error Logs now show which page and link caused the problem.</item>
+            <item>The error log no longer fills up with Page Not Found entries.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
         <version>6.2.7</version>
         <security>
             <item>Fixed a SQL injection vulnerability in the Joomla Articles element.</item>

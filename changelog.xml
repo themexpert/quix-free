@@ -3,6 +3,18 @@
     <changelog>
         <element>pkg_quix</element>
         <type>package</type>
+        <version>6.2.9</version>
+        <fix>
+            <item>The builder no longer sits on the loading animation forever when the canvas fails to open; it now explains what went wrong within a few seconds.</item>
+            <item>The builder canvas recovers on its own when the site is opened on a different address than the one set in Global Configuration.</item>
+            <item>The builder now reports when the canvas is redirected to a login, Page Not Found, or home page instead of loading the editor.</item>
+            <item>Restored the correct multilingual check so language prefixes are only added on sites that actually use the language filter.</item>
+            <item>Resolved article sorting issue</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
         <version>6.2.8</version>
         <fix>
             <item>The builder now opens and saves on sites installed in a subfolder.</item>

@@ -10,6 +10,7 @@
             <item>List bullets now take the colour of their text.</item>
             <item>The element settings panel no longer changes width when you click into the text editor.</item>
             <item>Elements with a default placeholder image now show in the builder preview.</item>
+            <item>Modal Popup is available in the builder again.</item>
         </fix>
         <addition>
             <item>Editor element: rich text that keeps exactly the formatting you give it, with no Quix fonts or colours added.</item>

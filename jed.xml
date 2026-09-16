@@ -11,7 +11,7 @@
         <downloads>
             <downloadurl type="full" format="zip">https://github.com/themexpert/quix-free/releases/download/6.3.0/pkg_quix_free.zip</downloadurl>
         </downloads>
-        <sha256>93e45d041bd9f267bf327ece3d85726a03d0e6e295f3190eb539e4b38951bf0b</sha256>
+        <sha256>d4eba13806d844fa50f284b3aeb2b0b0291c810e0ea00c4e3fe80ec6153b51b3</sha256>
         <maintainer>ThemeXpert</maintainer>
         <maintainerurl>https://www.themexpert.com</maintainerurl>
         <targetplatform name="joomla" version="(3\.10|4\.|5\.|6\.)"/>

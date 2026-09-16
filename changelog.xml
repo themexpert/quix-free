@@ -3,6 +3,27 @@
     <changelog>
         <element>pkg_quix</element>
         <type>package</type>
+        <version>6.3.0</version>
+        <fix>
+            <item>Bold text now shows as bold on the page, not only in the text editor.</item>
+            <item>Formatting, undo and changes made in the editor's Code tab now show in the builder straight away.</item>
+            <item>List bullets now take the colour of their text.</item>
+            <item>The element settings panel no longer changes width when you click into the text editor.</item>
+            <item>Elements with a default placeholder image now show in the builder preview.</item>
+        </fix>
+        <addition>
+            <item>Editor element: rich text that keeps exactly the formatting you give it, with no Quix fonts or colours added.</item>
+            <item>Open any text editor in a large popup to work comfortably with long content.</item>
+            <item>Joomla Articles: new Carousel layout with arrows, dots and pause on hover.</item>
+        </addition>
+        <change>
+            <item>The text editor in the element settings now shows the element's font, so formatting looks the way it will on the page.</item>
+            <item>The element settings panel can be widened by dragging its edge and remembers the width you choose.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
         <version>6.2.9</version>
         <fix>
             <item>The builder no longer sits on the loading animation forever when the canvas fails to open; it now explains what went wrong within a few seconds.</item>

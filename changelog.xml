@@ -3,6 +3,17 @@
     <changelog>
         <element>pkg_quix</element>
         <type>package</type>
+        <version>6.3.1</version>
+        <fix>
+            <item>Pages could fail to save with an error when Smart Search was enabled.</item>
+            <item>Pages saved in the builder now appear in Smart Search without waiting for a reindex.</item>
+            <item>Icons could fail to load after clearing the Quix cache on busy sites.</item>
+            <item>Search results could fail to load on sites using the Atom template.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
         <version>6.3.0</version>
         <fix>
             <item>Bold text now shows as bold on the page, not only in the text editor.</item>

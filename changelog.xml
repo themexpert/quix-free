@@ -3,6 +3,17 @@
     <changelog>
         <element>pkg_quix</element>
         <type>package</type>
+        <version>6.3.2</version>
+        <fix>
+            <item>The builder no longer reloads over and over without opening.</item>
+            <item>The builder no longer bounces back and forth with the login page instead of opening.</item>
+            <item>Front-end editors can now open the builder for pages they are allowed to edit.</item>
+            <item>A page whose Quix files are missing now reports what is missing in Debug / Error Logs instead of coming back blank.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
         <version>6.3.1</version>
         <fix>
             <item>Pages could fail to save with an error when Smart Search was enabled.</item>
@@ -550,32 +561,73 @@
             <item>fix: Fixed the D&amp;D issue with the row and column.</item>
             <item>fix: Fixed the style broken issue in free lock popover.</item>
             <item>fix: Fixed the free lock in element popover not showing issue.</item>
-            <item>fix: Fixed issue where custom styles for elements were not being applied.</item>
-            <item>fix: Fixed issue where the "My Elements" list was not updating correctly after adding or removing elements.</item>
-            <item>fix: Fixed issue where removing width and height settings did not revert to 100%, instead staying at 0.</item>
-            <item>fix: Fixed layer item drag and drop issue on every second column.</item>
-            <item>fix: Fixed the group-repeater title overflow issue.</item>
-            <item>fix: Moved the reload seo-panel next to the search field field.</item>
-            <item>fix: Fixed Section Add misplace issue from the context menu.</item>
-            <item>fix: Fixed layer item drag and drop issue</item>
-            <item>fix: Fixed nested element not selecting issue.</item>
-            <item>fix: Group Repeater value sync issue.</item>
-            <item>fix: Fixed the Upgrade to Pro and License Missing message and url issue.</item>
-            <item>fix: Fixed the Nested Element Selection Issue</item>
-            <item>fix: Fixed the Nested Element Delete Issue From Context Menu.</item>
-            <item>fix: Fixed the Tree Item indentation issue.</item>
         </fix>
         <addition>
             <item>Added Multilingual support for the Quix editor.</item>
             <item>Added Collapse Layer panel feature.</item>
             <item>Quix-5 stable release</item>
-            <item>Introduced dark mode.</item>
-            <item>Added new dimension control for better accessibility.</item>
         </addition>
         <change>
             <item>Made some small UI improvements.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.0.1-beta4</version>
+        <fix>
+            <item>fix: Fixed issue where custom styles for elements were not being applied.</item>
+            <item>fix: Fixed issue where the "My Elements" list was not updating correctly after adding or removing elements.</item>
+            <item>fix: Fixed issue where removing width and height settings did not revert to 100%, instead staying at 0.</item>
+        </fix>
+        <addition>
+            <item>Introduced dark mode.</item>
+            <item>Added new dimension control for better accessibility.</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.0.1-beta3</version>
+        <fix>
+            <item>fix: Fixed layer item drag and drop issue on every second column.</item>
+            <item>fix: Fixed the group-repeater title overflow issue.</item>
+            <item>fix: Moved the reload seo-panel next to the search field field.</item>
+            <item>fix: Fixed Section Add misplace issue from the context menu.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.0.1-beta2</version>
+        <fix>
+            <item>fix: Fixed layer item drag and drop issue</item>
+            <item>fix: Fixed nested element not selecting issue.</item>
+            <item>fix: Group Repeater value sync issue.</item>
+        </fix>
+        <change>
             <item>Optimized and Settings opening process</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.0.1-beta1</version>
+        <fix>
+            <item>fix: Fixed the Upgrade to Pro and License Missing message and url issue.</item>
+            <item>fix: Fixed the Nested Element Selection Issue</item>
+            <item>fix: Fixed the Nested Element Delete Issue From Context Menu.</item>
+            <item>fix: Fixed the Tree Item indentation issue.</item>
+        </fix>
+        <change>
             <item>Improved the canvas element selection functionality.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>5.0.0-beta1</version>
+        <change>
             <item>New UI</item>
             <item>Performance Improved</item>
         </change>
@@ -1271,6 +1323,13 @@
             <item>🐛 Element padding/margin bug fixed</item>
             <item>🐛 Image loading bug fixed</item>
             <item>🐛 Column reverse bug for mobile view</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.0.0-beta4</version>
+        <fix>
             <item>💄 Style fix for layouts selection grid</item>
             <item>🐛 Fix gallery element layout rendering problem</item>
             <item>💄 Text element alignment justify typo fixed</item>
@@ -1285,6 +1344,17 @@
             <item>🐛 Icon list element horizontal layout issue fixed</item>
             <item>🐛 Image path fixed and image cache disabled on debugging</item>
             <item>🐛 Complex image relative path and gallery element fixed</item>
+        </fix>
+        <change>
+            <item>refactor: 💡 all dependent codes for namespace change fixed</item>
+            <item>🐛 Init quix and classic loader improved</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>4.0.0-beta3</version>
+        <fix>
             <item>🐛 Page migration fetal error fixed for responsive</item>
             <item>🐛 Form element options and style fixed</item>
             <item>🐛 Bootstrap legacy css added</item>
@@ -1301,8 +1371,6 @@
             <item>💄 Installation message fixed</item>
         </fix>
         <change>
-            <item>refactor: 💡 all dependent codes for namespace change fixed</item>
-            <item>🐛 Init quix and classic loader improved</item>
             <item>💡 Joomla Category field rebuild to show real time category</item>
             <item>💡 Image optimization</item>
         </change>
@@ -2648,6 +2716,17 @@
             <item>Preview icon change</item>
             <item>Equal column responsive fix</item>
             <item>Collection not loading inside other component</item>
+        </fix>
+        <addition>
+            <item>Button Element border hover color added</item>
+            <item>Blurb background hover, border and hover color option added</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>1.0.0-Beta.2</version>
+        <note>
             <item>Accordion Element</item>
             <item>Blurb Element</item>
             <item>Icon Element</item>
@@ -2661,10 +2740,6 @@
             <item>Multiple Joomla module loading fix</item>
             <item>Group Repeater fix</item>
             <item>Fonts Bug Fix</item>
-        </fix>
-        <addition>
-            <item>Button Element border hover color added</item>
-            <item>Blurb background hover, border and hover color option added</item>
-        </addition>
+        </note>
     </changelog>
 </changelogs>

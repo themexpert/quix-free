@@ -1,0 +1,52 @@
+# Refreshes webfonts/webfonts.json from the Google Fonts Developer API.
+# Quix downloads that file instead of calling Google with its own key.
+name: Update webfonts
+
+on:
+  schedule:
+    - cron: '17 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-webfonts
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch font list
+        env:
+          GOOGLE_FONTS_API_KEY: ${{ secrets.GOOGLE_FONTS_API_KEY }}
+        run: |
+          set -euo pipefail
+          curl -sS -f --retry 3 --max-time 60 \
+            "https://www.googleapis.com/webfonts/v1/webfonts?key=${GOOGLE_FONTS_API_KEY}" \
+            -o "$RUNNER_TEMP/webfonts.json"
+
+      - name: Validate
+        run: |
+          set -euo pipefail
+          jq -e '(.items | type == "array") and (.items | length > 0)' "$RUNNER_TEMP/webfonts.json" > /dev/null
+          echo "Fonts: $(jq '.items | length' "$RUNNER_TEMP/webfonts.json")"
+          mkdir -p webfonts
+          mv "$RUNNER_TEMP/webfonts.json" webfonts/webfonts.json
+
+      - name: Commit if changed
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- webfonts/webfonts.json && git ls-files --error-unmatch webfonts/webfonts.json > /dev/null 2>&1; then
+            echo "No changes."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add webfonts/webfonts.json
+          git commit -m 'Update Google Fonts list'
+          git push

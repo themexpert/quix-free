@@ -3,6 +3,38 @@
     <changelog>
         <element>pkg_quix</element>
         <type>package</type>
+        <version>6.3.4</version>
+        <security>
+            <item>Pages: editors can no longer run code on the server, and guests can no longer change Quix settings or read access-restricted pages.</item>
+            <item>Joomla Content: text from articles, including titles and categories, can no longer run scripts on Quix pages.</item>
+            <item>Media: pasted images, image resizing and the bundled JMedia media manager are hardened.</item>
+        </security>
+        <fix>
+            <item>Joomla Articles: ordering and category are kept on pages saved with older versions, the Carousel arrow, dot and autoplay settings now appear, and images with an apostrophe in their alt text no longer break.</item>
+            <item>Button: icons chosen from the icon library now show.</item>
+            <item>Forms: pages with a form now display on Joomla 4.</item>
+            <item>Builder: fixed outdated labels, element icons not loading on sites opened over both http and https, and errors when JCE is the default editor.</item>
+            <item>Admin Menu: Templates, Header and Footer are now translated in German, French and Portuguese.</item>
+            <item>Dashboard: the "Licence Missing" notice now clears once the licence is activated.</item>
+            <item>Installation: no more warnings about missing language files.</item>
+            <item>Frontend: PHP warnings no longer show on pages when the server displays errors.</item>
+        </fix>
+        <change>
+            <item>Icons: downloaded once and kept on your site, so pages no longer depend on getquix.net and keep their icons after clearing the cache or updating.</item>
+            <item>Joomla Module: modules not assigned to the current menu item now show, and the chosen Module Style is applied.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
+        <version>6.3.3</version>
+        <fix>
+            <item>Pages could come back blank when an element was still using the default placeholder image.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
         <version>6.3.2</version>
         <fix>
             <item>The builder no longer reloads over and over without opening.</item>

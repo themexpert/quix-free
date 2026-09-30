@@ -5,13 +5,13 @@
         <description>Next generation drag and drop page builder for Joomla.</description>
         <element>pkg_quix</element>
         <type>package</type>
-        <version>6.3.2</version>
+        <version>6.3.4</version>
         <infourl title="Quix Page Builder">https://www.themexpert.com/quix-pagebuilder</infourl>
         <changelogurl>https://raw.githubusercontent.com/themexpert/quix-free/main/changelog.xml</changelogurl>
         <downloads>
-            <downloadurl type="full" format="zip">https://github.com/themexpert/quix-free/releases/download/6.3.2/pkg_quix_free.zip</downloadurl>
+            <downloadurl type="full" format="zip">https://github.com/themexpert/quix-free/releases/download/6.3.4/pkg_quix_free.zip</downloadurl>
         </downloads>
-        <sha256>ff7f5148897dbe80a0b8295c18273dadced438f49c7efcdb91a48b6fd5b388ab</sha256>
+        <sha256>9f14856c36adb7151298c2f75e080d11badfdcdcc504bcf9025abf0edebeb66c</sha256>
         <maintainer>ThemeXpert</maintainer>
         <maintainerurl>https://www.themexpert.com</maintainerurl>
         <targetplatform name="joomla" version="(3\.10|4\.|5\.|6\.)"/>

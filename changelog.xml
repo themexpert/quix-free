@@ -3,6 +3,28 @@
     <changelog>
         <element>pkg_quix</element>
         <type>package</type>
+        <version>6.3.5</version>
+        <fix>
+            <item>Gantry 5 templates: pages built with Quix show again instead of an error page.</item>
+            <item>Typography: Google Fonts are back in the font list.</item>
+            <item>Joomla Module: a module that hits an error no longer leaves the whole page blank; only that module is left out.</item>
+            <item>Builder: opens again on hosts whose firewall blocked it while loading elements.</item>
+            <item>Builder: element styles load again on Apache servers.</item>
+            <item>Builder: the "View error logs" link on the loading error message now opens the Logs page.</item>
+            <item>Admin menu: the Templates dropdown no longer highlights every item at once.</item>
+            <item>Post-installation Messages: removed an old promotion that showed up as a separate "700" list.</item>
+        </fix>
+        <addition>
+            <item>Data Sharing: choose whether to get Quix updates by email and send Quix error reports to ThemeXpert, from the welcome screen, Post-installation Messages or Quix Options. Quix Free shares nothing unless you say yes.</item>
+        </addition>
+        <change>
+            <item>Debug Logs: new Download Log button saves the full log, with your site's Quix, Joomla and PHP versions, ready to send to support.</item>
+            <item>Load Absolute URL: Quix now checks once whether your server serves its files directly and switches the setting off when it doesn't.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
         <version>6.3.4</version>
         <security>
             <item>Pages: editors can no longer run code on the server, and guests can no longer change Quix settings or read access-restricted pages.</item>

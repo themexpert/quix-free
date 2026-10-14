@@ -3,6 +3,21 @@
     <changelog>
         <element>pkg_quix</element>
         <type>package</type>
+        <version>6.3.6</version>
+        <security>
+            <item>Frontend: public pages no longer load the axios library, so security scanners stop reporting its CVEs. The builder now uses axios 1.20.</item>
+        </security>
+        <fix>
+            <item>Media manager: no longer opens as a blank window on sites with a strict Content Security Policy (bundled JMedia 1.6.3).</item>
+            <item>Media manager: images the server can't read show a file icon instead of a broken thumbnail, and the admin view sizes itself correctly on first load.</item>
+            <item>Headers and footers: no more errors on feeds, OpenSearch and other non-HTML pages.</item>
+            <item>Pages: still display when the server won't let Quix write its page cache.</item>
+            <item>Pages: a media folder Quix can't write to no longer breaks the page while copying element icons.</item>
+        </fix>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
         <version>6.3.5</version>
         <fix>
             <item>Gantry 5 templates: pages built with Quix show again instead of an error page.</item>

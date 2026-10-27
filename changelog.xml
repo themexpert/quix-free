@@ -3,6 +3,38 @@
     <changelog>
         <element>pkg_quix</element>
         <type>package</type>
+        <version>6.4.0</version>
+        <security>
+            <item>Joomla Article and Joomla Articles elements now respect article access levels, so visitors only see articles they are allowed to read.</item>
+        </security>
+        <fix>
+            <item>Joomla 6: creating a new page, saving a page, clearing the cache and opening Themes no longer end in an error page.</item>
+            <item>Editor button: choosing a Quix template while editing an article on the front end works again on Joomla 4, 5 and 6.</item>
+            <item>Atom template: menus with third-level items show correctly; items no longer appear in the wrong dropdown.</item>
+            <item>Atom template: Joomla 6 sites using Atom no longer show an error page after installing or updating Quix.</item>
+            <item>Atom template: sidebars now stack below the content on phones.</item>
+            <item>Atom template: the logo, menu, page content, sidebars and footer now line up on the same edges, including on Quix pages.</item>
+            <item>Saving articles or other content from command-line tools no longer fails when Quix is installed.</item>
+            <item>Images: alt text with an apostrophe (We're, haven't) no longer breaks the image or pulls the next element into it.</item>
+            <item>Carousels: Testimonial, Media, Clients and Joomla Articles carousels now start on slow-loading pages.</item>
+            <item>Builder: opens again on sites running some JCE editor versions.</item>
+            <item>Builder: no longer loads an outdated editor after an update on hosts that serve compressed files.</item>
+            <item>Admin: the Options button in Articles, Menus, Users and other components no longer reads "Settings" when Quix is installed.</item>
+            <item>Smart Search: pages indexed from the command line can now be found by their text, not just their title.</item>
+        </fix>
+        <addition>
+            <item>Atom template: new Joomla 4, 5 and 6 layouts, so articles, blogs, login, registration, profile, Smart Search, tags, contacts, menus and other modules are styled by Atom instead of plain Joomla markup.</item>
+        </addition>
+        <change>
+            <item>Updating Quix now refreshes your already-published pages, so fixes apply without re-saving each page.</item>
+            <item>Faster pages: the first images start loading straight away, icon pack icons and Google Fonts need fewer requests, and the animation script loads only on pages that animate.</item>
+            <item>Joomla 5 and 6: Quix no longer needs the Behaviour - Backward Compatibility plugin.</item>
+            <item>Atom template: your own Atom layout overrides are kept when you update.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
         <version>6.3.6</version>
         <security>
             <item>Frontend: public pages no longer load the axios library, so security scanners stop reporting its CVEs. The builder now uses axios 1.20.</item>

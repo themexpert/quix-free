@@ -3,6 +3,35 @@
     <changelog>
         <element>pkg_quix</element>
         <type>package</type>
+        <version>6.5.0</version>
+        <fix>
+            <item>Quix headers and footers replace the template's own on Cassiopeia, YOOtheme and Astroid.</item>
+            <item>A new page no longer saves over your home page when Home is a Quix page.</item>
+            <item>Sections no longer go missing on servers that can't write the template cache.</item>
+            <item>No more duplicate Open Graph tags with T4 and similar SEO plugins.</item>
+            <item>Uninstalling removes every Quix and JMedia extension.</item>
+            <item>New Page no longer opens the builder signed out.</item>
+            <item>French and German translations load again.</item>
+        </fix>
+        <addition>
+            <item>Get started checklist on the Quix Pages screen.</item>
+            <item>One top menu on every Quix admin screen, with New Page and Clean Cache, plus a full Components → Quix menu.</item>
+            <item>Uninstalling Quix asks whether to keep or delete your pages. Keeping them is the default.</item>
+            <item>Option to keep your template's own header and footer.</item>
+        </addition>
+        <change>
+            <item>Pro elements and features need an active licence. Without one they are locked in the editor and hidden from visitors.</item>
+            <item>Entrance animation is now Pro. Animations already on your pages keep working.</item>
+            <item>The editor and the media picker open faster, especially on shared hosting.</item>
+            <item>Faster pages when a Quix header or footer is assigned.</item>
+            <item>Save errors now say what went wrong.</item>
+            <item>Element overrides in your template's quix/quixnxt folder now work.</item>
+            <item>Bundled JMedia 1.6.4: WebP and AVIF uploads are allowed, and custom file types like image/svg+xml work.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
         <version>6.4.0</version>
         <security>
             <item>Joomla Article and Joomla Articles elements now respect article access levels, so visitors only see articles they are allowed to read.</item>

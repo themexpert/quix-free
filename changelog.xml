@@ -3,6 +3,22 @@
     <changelog>
         <element>pkg_quix</element>
         <type>package</type>
+        <version>6.5.1</version>
+        <fix>
+            <item>The AI Section Generator works again with Claude.</item>
+            <item>Fixed garbled entries in the downloaded Debug Log.</item>
+            <item>Pages built with the old Quix classic builder no longer crash the editor on Joomla 4, 5 and 6. Quix now tells you how to get them migrated.</item>
+        </fix>
+        <addition>
+            <item>Quix warns you when your server is missing PHP's mbstring extension, which can make pages and the editor very slow.</item>
+        </addition>
+        <change>
+            <item>AI-generated sections keep text readable against their background.</item>
+        </change>
+    </changelog>
+    <changelog>
+        <element>pkg_quix</element>
+        <type>package</type>
         <version>6.5.0</version>
         <fix>
             <item>Quix headers and footers replace the template's own on Cassiopeia, YOOtheme and Astroid.</item>
